@@ -16,9 +16,5 @@ var pim_login = {
                 }
             }
         });
-    },
-
-    check: function(){
-        alert("SDFSD");
     }
 }

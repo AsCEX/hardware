@@ -9,8 +9,8 @@ class MY_Controller extends CI_Controller {
         parent::__construct();
 
 
-       /* if(!$this->session->userdata('u_id'))
-            redirect('auth/login');*/
+       if(!$this->session->userdata('emp_id'))
+            redirect('auth/login');
 
     }
 

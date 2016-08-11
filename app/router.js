@@ -1,11 +1,23 @@
 var routes = {
 
-    procurement_plan: function(){
-        $('#main-content').panel('refresh', site_url + 'procurement_plan/procPlan');
+    underconstruction: function(){
+        $.messager.alert('Under Construction', 'This module is under construction', 'info');
     },
 
-    purchase_request: function(){
-        $('#main-content').panel('refresh', site_url + 'purchase_request/dataGrid');
-    }
+    coils: function(){
+        $('#main-content').panel('refresh', site_url + 'coils');
+    },
+
+    customers: function(){
+        $('#main-content').panel('refresh', site_url + 'customers');
+    },
+
+    employees: function(){
+        $('#main-content').panel('refresh', site_url + 'employees');
+    },
+
+    suppliers: function(){
+        $('#main-content').panel('refresh', site_url + 'suppliers');
+    },
 
 }

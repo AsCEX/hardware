@@ -1,13 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Inventory Management System</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Inventory Management System</title>
 
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/bootstrap.scaffolding.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/font-awesome.min.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/bootstrap/easyui.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/icon.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/bootstrap/easyui.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/icon.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/main.css') ?>">
     <style>body{ visibility: hidden; }</style>
     <script type="text/javascript">
@@ -20,7 +20,7 @@
 
 <div region="south" split="false" style="height:32px;line-height:27px;">
     <div class="easyui-layout" fit="true" split="false">
-        <div region="west" split="false" width="20%" style="padding:0 5px;"><?php echo $this->session->userdata('ui_firstname') . " " . $this->session->userdata('ui_lastname'); ?></div>
+        <div region="west" split="false" width="20%" style="padding:0 5px;">Please Log In</div>
         <div region="center" split="false" style="padding:0 5px;"></div>
         <div region="east" split="false" width="20%" style="padding:0 5px;"><span id="system-clock" style="float:right;"></span></div>
     </div>
@@ -37,20 +37,42 @@
                 <a href="" class="easyui-menubutton" data-options="plain:true,menu:'#setup'">Setup</a>
             </div>
             <div id="setup" style="width:250px;">
-                <div onclick="routes.customers()" >Customers</div>
-                <div onclick="routes.employees()" >Employees</div>
-                <div onclick="routes.suppliers()" >Suppliers</div>
-                <div class="menu-sep"></div>
-                <div onclick="routes.coils()" >Coils</div>
-                <div onclick="routes.underconstruction()" >Sheets</div>
-
+                <div onclick="routes.purchase_request()" >Customers</div>
+                <div onclick="routes.purchase_request()" >Employees</div>
+                <div onclick="routes.procurement_plan()" >Suppliers</div>
             </div>
-        </div>
 
-        <div region="center">
-            <div id="main-content" class="easyui-panel" title="" fit="true" border="false" style="" ></div>
-        </div>
 
+            <div region="center" >
+                <div id="main-content" class="easyui-panel" title="" fit="true" border="false" >
+
+                    <div id="dlg" class="easyui-dialog" style="padding:50px;width:300px;height:300px;"
+                         closable="false"
+                         modal="true"
+                         title="System Login"
+                         buttons="#dlg-buttons">
+                        <form id="fm-login" method="post">
+                            <div class="fitem">
+                                <label style="width:300px;">Username:</label>
+                                <input name="username" class="easyui-textbox" required="true" align="right">
+                            </div>
+
+                            <div class="fitem">
+                                <label style="width:300px;">Password:</label>
+                                <input name="password" class="easyui-textbox" required="true" align="right" type="password">
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <div id="dlg-buttons">
+                        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="pim_login.login()" style="width:90px">Login</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
