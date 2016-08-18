@@ -19,7 +19,7 @@
             </div>
             <div class="fitem">
                 <label>Ext. Name:</label>
-                <input name="ui_extname" class="easyui-textbox" required="true" align="right" value="<?php echo isset($employee->ui_extname) ? $employee->ui_extname : ""; ?>">
+                <input name="ui_extname" class="easyui-textbox" align="right" value="<?php echo isset($employee->ui_extname) ? $employee->ui_extname : ""; ?>">
             </div>
             <div class="fitem">
                 <label>Address:</label>
@@ -27,7 +27,7 @@
             </div>
             <div class="fitem">
                 <label>Address 2:</label>
-                <input name="ui_address2" class="easyui-textbox" required="true" align="right" multiline="true" style="width: 160px; height: 100px;" value="<?php echo isset($employee->ui_address2) ? $employee->ui_address2 : ""; ?>">
+                <input name="ui_address2" class="easyui-textbox" align="right" multiline="true" style="width: 160px; height: 100px;" value="<?php echo isset($employee->ui_address2) ? $employee->ui_address2 : ""; ?>">
             </div>
             <div class="fitem">
                 <label>Zip:</label>

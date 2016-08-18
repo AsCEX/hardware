@@ -37,9 +37,9 @@ class Employees_model extends CI_Model
 
     }
 
-    public function save( $data ) {
+    public function save( $data, $emp_id = null, $emp_ui_id = null ) {
 
-        $ui_id = $this->saveUserInfo( $data );
+        $ui_id = $this->saveUserInfo( $data, $emp_ui_id );
 
         $data = array(
             'emp_ui_id'     => $ui_id,
@@ -49,12 +49,12 @@ class Employees_model extends CI_Model
             'emp_rate'      => $data['emp_rate']
         );
 
-        if ( isset($data['emp_id']) ) {
+        if ( $emp_id ) {
 
             $this->db->where("emp_id", $data['emp_id']);
             $this->db->update($this->tbl_employees, $data);
 
-            return $data['emp_id'];
+            return $emp_id;
 
         } else {
 
@@ -68,7 +68,7 @@ class Employees_model extends CI_Model
         }
     }
 
-    public function saveUserInfo( $data ) {
+    public function saveUserInfo( $data, $emp_ui_id = null ) {
 
         $userData = array(
             'ui_firstname'      => $data['ui_firstname'],
@@ -81,12 +81,12 @@ class Employees_model extends CI_Model
             'ui_contact_number' => $data['ui_contact_number'],
         );
 
-        if ( $data['emp_ui_id'] ) {
+        if ( $emp_ui_id ) {
 
             $this->db->where('ui_id', $data['emp_ui_id']);
             $this->db->update($this->tbl_user_info, $userData);
 
-            return $data['emp_ui_id'];
+            return $emp_ui_id;
 
         } else {
 

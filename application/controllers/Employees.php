@@ -27,7 +27,8 @@ class Employees extends MY_Controller {
 
     public function saveEmployee() {
 
-        $emp_id = $this->employees_model->save($_POST);
+        $post = $_POST;
+        $emp_id = $this->employees_model->save($post, $post['emp_id'], $post['emp_ui_id']);
 
         if ( $emp_id ) {
 
