@@ -44,10 +44,6 @@
                 <input name="emp_username" class="easyui-textbox" required="true" align="right" value="<?php echo isset($employee->emp_username) ? $employee->emp_username : ""; ?>">
             </div>
             <div class="fitem">
-                <label>Password:</label>
-                <input name="emp_password" class="easyui-textbox" required="true" align="right" value="<?php echo isset($employee->emp_password) ? $employee->emp_password : ""; ?>">
-            </div>
-            <div class="fitem">
                 <label>Rate:</label>
                 <input name="emp_rate" class="easyui-numberbox" required="true" align="right" value="<?php echo isset($employee->emp_rate) ? $employee->emp_rate : ""; ?>">
             </div>
@@ -58,3 +54,43 @@
 <style>
     #fm-employees .fitem label { width: 122px; }
 </style>
+<script>
+    $(function(){
+        $(document).on('change', "input[id='_easyui_textbox_input1'], input[id='_easyui_textbox_input3']", function() {
+
+            if ( $("input[id='_easyui_textbox_input3']").val().length > 1 && $("input[id='_easyui_textbox_input1']").val() !== "" ) {
+
+                var firstname = $("input[id='_easyui_textbox_input1']").val().charAt(0);
+                var lastname = $("input[id='_easyui_textbox_input3']").val();
+
+                var lastnameLength = lastname.split(" ").length;
+
+                if ( lastnameLength > 1 ) {
+                    var spaceChar = lastname.indexOf(" ");
+                    lastname = lastname.substring(0, spaceChar);
+                }
+
+                var username = firstname + lastname;
+
+                $.post( site_url + 'employees/checkUsername', { username: username }, function(response) {
+
+                    if ( Object.keys(response.result).length > 0 ) {
+                        assignUsername ( username + (Object.keys(response.result).length + 1) );
+                    } else {
+                        assignUsername( username );
+                    }
+                }, 'json');
+            }
+        });
+
+        function assignUsername ( username ) {
+            $("input[id='_easyui_textbox_input8'], input[name='emp_username']")
+                .val( username )
+                .prop('disabled', true);
+            $("input[id='_easyui_textbox_input8']")
+                .removeClass('validatebox-invalid textbox-prompt');
+            $("input[name='emp_username']")
+                .parent('span').removeClass('textbox-invalid');
+        }
+    });
+</script>

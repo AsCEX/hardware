@@ -48,8 +48,8 @@ var employees = {
                     [
                         {field:'ui_lastname',title:'Lastname',width:'10%'},
                         {field:'ui_firstname',title:'Firstname',width:'10%'},
-                        {field:'ui_middlename',title:'Middle Name',width:'5%'},
-                        {field:'ui_extname',title:'Ext. Name',width:'5%'},
+                        {field:'ui_middlename',title:'Middle Name',width:'7%'},
+                        {field:'ui_extname',title:'Ext. Name',width:'7%'},
                         {field:'ui_address',title:'Address',width:'20%'},
                         {field:'ui_address2',title:'Address 2',width:'20%'},
                         {field:'ui_zip',title:'Zip',width:'5%'},
