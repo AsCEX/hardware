@@ -46,7 +46,7 @@ var coils = {
             {field:'coil_width',title:'Width',width:'10%'},
             {field:'clr_name',title:'Color',width:'20%'},
             {field:'coil_created_by',title:'Created By',width:'20%'},
-            {field:'coid_created_date',title:'Date Created',width:'20%'}
+            {field:'coil_created_date',title:'Date Created',width:'20%'}
           ]
         ]
       }).datagrid('clientPaging');
@@ -95,7 +95,7 @@ var coils = {
   update: function() {
     var row = $('#dg-coils').datagrid('getSelected');
     if (row) {
-      $('#dlg-coils').dialog('open').dialog('refresh', site_url + 'coils/dialog/' + row.supp_id).dialog('center').dialog('setTitle','Edit');
+      $('#dlg-coils').dialog('open').dialog('refresh', site_url + 'coils/dialog/' + row.coil_id).dialog('center').dialog('setTitle','Edit');
       $('#fm-coils').form('load',row);
     }
   },
@@ -105,7 +105,7 @@ var coils = {
     if ( row ) {
       $.messager.confirm('Confirm', 'Delete Coil?', function(r) {
         if ( r ) {
-          $.post( site_url + 'coils/deleteCoil', { supp_id: row.supp_id }, function(response) {
+          $.post( site_url + 'coils/deleteCoil', { coil_id: row.coil_id }, function(response) {
             if ( response.status == 'success' ) {
               $.messager.alert('Message', 'Success', 'info', function() {
                 $('#dg-coils').datagrid('reload');

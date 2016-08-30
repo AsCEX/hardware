@@ -33,6 +33,7 @@ class Coils_model extends CI_Model {
 
     public function save( $data, $coil_id = null, $coil_created_by = null ) 
     {
+
       $created_by = $this->saveUserInfo( $data, $coil_id );
       $data = array(
         'supp_ui_id'    => $created_by,
@@ -64,7 +65,6 @@ class Coils_model extends CI_Model {
         'coil_width'          => $data['coil_width'],
         'coil_clr_id'         => $data['coil_clr_id'],
         'coil_created_by'     => $data['coil_created_by'],
-        'coil_created_date'   => $data['coil_created_date']
       );
 
       if ( $coil_id ) {
@@ -72,6 +72,7 @@ class Coils_model extends CI_Model {
         $this->db->update($this->tbl_coils, $coilData);
         return $coil_id;
       } else {
+        $coilData['coil_created_date'] = date('Y-m-d H:i:s');
         $coilInfo = $this->db->insert($this->tbl_coils, $coilData);
         if ( $coilInfo ) {
           return $this->db->insert_id();
@@ -79,5 +80,13 @@ class Coils_model extends CI_Model {
           return false;
         }
       }
+    }
+
+    public function delete( $data ) 
+    {
+      $this->db->where( "coil_id", $data['coil_id'] );
+      $this->db->delete( $this->tbl_coils);
+      if ( $this->db->affected_rows() > 0 ) return TRUE;
+      else return FALSE;
     }
 }

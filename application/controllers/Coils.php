@@ -7,6 +7,7 @@ class Coils extends MY_Controller {
   {
     parent::__construct();
     $this->load->model('coils_model');
+    $this->load->model('colors_model');
   }
 
   public function index()
@@ -35,10 +36,22 @@ class Coils extends MY_Controller {
     }
   }
 
+  public function deleteCoil() 
+  {
+    $delCoil = $this->coils_model->delete( $_POST );
+    if ( $delCoil ) {
+      $this->output
+        ->set_content_type('application/json')
+        ->set_output( json_encode( array( 'status' => 'success' ) ) );
+    }
+  }
+
   public function dialog($coil_id = 0)
   {
+    $data['userInfo'] = $this->session->userdata();
     $coil = $this->coils_model->getCoilById( $coil_id );
     $data['coils'] = ($coil) ? $coil : array();
+    $data['colors'] = $this->colors_model->getColorsGrid();
     $this->load->view('coils/dialog/add', $data);
   }
 }
