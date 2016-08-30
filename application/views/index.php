@@ -42,6 +42,7 @@
                 <div onclick="routes.suppliers()" >Suppliers</div>
                 <div class="menu-sep"></div>
                 <div onclick="routes.coils()" >Coils</div>
+                <div onclick="routes.colors()" >Colors</div>
                 <div onclick="routes.underconstruction()" >Sheets</div>
 
             </div>
