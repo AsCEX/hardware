@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-08-19 21:41:43
+Date: 2016-08-28 08:21:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -68,6 +68,40 @@ CREATE TABLE `customers` (
 
 -- ----------------------------
 -- Records of customers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `deliveries`
+-- ----------------------------
+DROP TABLE IF EXISTS `deliveries`;
+CREATE TABLE `deliveries` (
+  `dr_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `dr_delivery_date` date DEFAULT NULL,
+  `dr_supp_id` bigint(20) DEFAULT NULL,
+  `dr_created_date` date DEFAULT NULL,
+  `dr_created_by` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`dr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of deliveries
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `delivery_details`
+-- ----------------------------
+DROP TABLE IF EXISTS `delivery_details`;
+CREATE TABLE `delivery_details` (
+  `drd_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `drd_qty` decimal(11,2) DEFAULT NULL,
+  `drd_price` decimal(10,0) DEFAULT NULL,
+  `drd_coil_id` bigint(20) DEFAULT NULL,
+  `drd_dr_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`drd_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of delivery_details
 -- ----------------------------
 
 -- ----------------------------
@@ -151,11 +185,12 @@ CREATE TABLE `suppliers` (
   `supp_company` varchar(100) DEFAULT NULL,
   `supp_status` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`supp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of suppliers
 -- ----------------------------
+INSERT INTO `suppliers` VALUES ('1', '2', 'asdfasdfa', '1');
 
 -- ----------------------------
 -- Table structure for `user_informations`
@@ -172,9 +207,10 @@ CREATE TABLE `user_informations` (
   `ui_zip` varchar(10) DEFAULT NULL,
   `ui_contact_number` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ui_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of user_informations
 -- ----------------------------
 INSERT INTO `user_informations` VALUES ('1', 'Desidido', 'Kho', 'Manigbas', null, 'Pogi St', null, '8000', '09999911991');
+INSERT INTO `user_informations` VALUES ('2', 'test', 'tes', 'tes', '', 'asdfaf', '', '800', '1231231311');

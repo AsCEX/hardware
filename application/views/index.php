@@ -34,18 +34,24 @@
 
             <div id="mm" style="padding:2px 5px;">
                 <a href="/" class="easyui-linkbutton" data-options="plain:true">Home</a>
+                <a href="" class="easyui-menubutton" data-options="plain:true,menu:'#transactions'">Transactions</a>
                 <a href="" class="easyui-menubutton" data-options="plain:true,menu:'#setup'">Setup</a>
             </div>
             <div id="setup" style="width:250px;">
-                <div onclick="routes.customers()" >Customers</div>
-                <div onclick="routes.employees()" >Employees</div>
-                <div onclick="routes.suppliers()" >Suppliers</div>
+                <div class="menu-links" data-url="<?php echo site_url('customers'); ?>" >Customers</div>
+                <div class="menu-links" data-url="<?php echo site_url('employees'); ?>" >Employees</div>
+                <div class="menu-links" data-url="<?php echo site_url('suppliers'); ?>" >Suppliers</div>
                 <div class="menu-sep"></div>
-                <div onclick="routes.coils()" >Coils</div>
-                <div onclick="routes.colors()" >Colors</div>
-                <div onclick="routes.underconstruction()" >Sheets</div>
+                <div class="menu-links" data-url="<?php echo site_url('coils'); ?>" >Coils</div>
+                <div class="menu-links" data-url="<?php echo site_url('sheets'); ?>" >Sheets</div>
+                <div class="menu-links" data-url="<?php echo site_url('colors'); ?>" >Colors</div>
 
             </div>
+            <div id="transactions" style="width:250px;">
+                <div class="menu-links" data-url="<?php echo site_url('deliveries'); ?>" >Deliveries</div>
+                <div class="menu-links" data-url="<?php echo site_url('purchase_order'); ?>" >Purchased Orders</div>
+
+        </div>
         </div>
 
         <div region="center">
@@ -71,6 +77,10 @@
 <script type="text/javascript" src="<?php echo site_url('app/clock.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/login.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/router.js') ?>"></script>
+
+<script type="text/javascript" src="<?php echo site_url('app/suppliers.js') ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('app/deliveries.js') ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('app/delivery_details.js') ?>"></script>
 
 <script type="text/javascript">
     $(document).ready(function(){
