@@ -20,4 +20,8 @@ var routes = {
         $('#main-content').panel('refresh', site_url + 'suppliers');
     },
 
+    colors: function() {
+        $('#main-content').panel('refresh', site_url + 'colors');
+    },
+
 }

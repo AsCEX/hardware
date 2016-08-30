@@ -105,7 +105,6 @@ var employees = {
     update: function(){
 
         var row = $('#dg-employees').datagrid('getSelected');
-        console.log(row);
         if (row){
             $('#dlg-employees').dialog('open').dialog('refresh', site_url + 'employees/dialog/' + row.emp_id).dialog('center').dialog('setTitle','Edit');
             $('#fm-employees').form('load',row);
