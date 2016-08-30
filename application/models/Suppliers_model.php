@@ -2,8 +2,8 @@
 
 class Suppliers_model extends CI_Model {
   
-    public $tbl_suppliers = "suppliers";
-    public $tbl_user_info = "user_informations";
+    private $tbl_suppliers = "suppliers";
+    private $tbl_user_info = "user_informations";
 
     public function __construct()
     {
