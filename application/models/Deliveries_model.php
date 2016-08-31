@@ -51,6 +51,8 @@ class Deliveries_model extends CI_Model
 
     public function save( $data, $dr_id = null) {
 
+        $data['dr_delivery_date'] = date("Y-m-d", strtotime($data['dr_delivery_date']) );
+
         if ( $dr_id ) {
 
             $this->db->where("dr_id", $data['dr_id']);
@@ -59,7 +61,8 @@ class Deliveries_model extends CI_Model
             return $dr_id;
 
         } else {
-
+            $data['dr_created_date'] = date('Y-m-d H:i:s');
+            $data['dr_created_by'] = $this->session->all_userdata()['ui_id'];
             $delivery = $this->db->insert($this->tbl_deliveries, $data);
 
             if ( $delivery ) {
@@ -101,15 +104,12 @@ class Deliveries_model extends CI_Model
                 }
             }
         }
-
+*/
         public function delete( $data ) {
-
-            $this->db->set( "emp_status", 0 );
-            $this->db->where( "emp_id", $data['emp_id'] );
-            $this->db->update( $this->tbl_employees );
-
+            $this->db->where( "dr_id", $data['dr_id'] );
+            $this->db->delete( $this->tbl_deliveries );
             if ( $this->db->affected_rows() > 0 ) return TRUE;
             else return FALSE;
         }
-    */
+
 }

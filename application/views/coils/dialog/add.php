@@ -5,7 +5,7 @@
 
     <div id="cc" class="easyui-layout" fit="true" style="height:450px;">
         <div data-options="region:'center',title:'Coil Info'" style="padding:5px;">
-            <input name="coil_drd_id" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_dr_id) ? $coils->coil_dr_id : $dr_id; ?>">
+            <input type="hidden" name="coil_dr_id" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_dr_id) ? $coils->coil_dr_id : $drd_id; ?>">
             <div class="fitem">
                 <label>Coil Code:</label>
                 <input name="coil_code" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_code) ? $coils->coil_code : ""; ?>">
@@ -24,7 +24,7 @@
             </div>
             <div class="fitem">
                 <label>Color:</label>
-                <select name="coil_clr_id" required="true">
+                <select name="coil_clr_id" class="easyui-combobox">
                   <option value="" disabled selected>Select Color</option>
                   <?php if($colors) { ?>
                     <?php foreach ($colors as $color) { 

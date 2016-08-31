@@ -11,14 +11,22 @@
             <div data-options="region:'center',title:'Deliveries'" style="padding:5px;">
 
                 <div class="fitem">
-                    <label>Suppliers:</label>
-                    <input id="dr_supp_id" name="dr_supp_id" class="easyui-textbox" value="<?php echo isset($delivery->dr_supp_id) ? $delivery->dr_supp_id : ''; ?>" style="width:200px"/>
-
+                    <label>Supplier:</label>
+                    <select id="dr_supp_id" class="easyui-combobox" style="width:180px;" name="dr_supp_id">
+                        <option value="" disabled selected>Select Supplier</option>
+                        <?php if($suppliers) { ?>
+                            <?php foreach ($suppliers as $supplier) {
+                                $selected = ($supplier->supp_id === $delivery->dr_supp_id)? "selected": "";
+                                ?>
+                                <option value="<?php echo $supplier->supp_id; ?>" <?php echo $selected;?> ><?php echo $supplier->supp_company; ?></option>
+                            <?php } ?>
+                        <?php } ?>
+                    </select>
                 </div>
 
                 <div class="fitem">
                     <label>Delivery Date:</label>
-                    <input name="dr_delivery_date" class="easyui-textbox" align="right" value="<?php echo isset($delivery->dr_delivery_date) ? $delivery->dr_delivery_date : ''; ?>">
+                    <input id="dr_delivery_date" type="text" name="dr_delivery_date" class="easyui-datebox" required="required" value="<?php echo isset($delivery->dr_delivery_date) ? $delivery->dr_delivery_date : ''; ?>">
                 </div>
 
                 <!--<input type="hidden" id="pr_item_json" name="pr_item_json" value="" />-->

@@ -6,6 +6,7 @@ class Deliveries extends MY_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('deliveries_model');
+        $this->load->model('suppliers_model');
     }
 
     public function index()
@@ -38,11 +39,11 @@ class Deliveries extends MY_Controller {
         }
     }
 
-    public function deleteDeliveries() {
+    public function deleteDelivery() {
 
-        $delEmp = $this->deliveries_model->delete( $_POST );
+        $delDelivery = $this->deliveries_model->delete( $_POST );
 
-        if ( $delEmp ) {
+        if ( $delDelivery ) {
 
             $this->output
                 ->set_content_type('application/json')
@@ -51,11 +52,12 @@ class Deliveries extends MY_Controller {
     }
 
     public function dialog( $dr_id = 0 ){
-
         $dr = $this->deliveries_model->getDeliveryById( $dr_id );
-
+        if($dr) {
+            $dr->dr_delivery_date = date("m/d/Y", strtotime($dr->dr_delivery_date));
+        }
+        $data['suppliers'] =  $this->suppliers_model->getSuppliersGrid();
         $data['delivery'] = ($dr) ? $dr : array();
-
         $this->load->view('deliveries/dialog/add', $data);
     }
 }

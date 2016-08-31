@@ -106,9 +106,9 @@ var deliveries = {
 
         var row = $('#dg-deliveries').datagrid('getSelected');
         if ( row ) {
-            $.messager.confirm('Confirm', 'Delete Employee?', function(r) {
+            $.messager.confirm('Confirm', 'Delete Delivery?', function(r) {
                 if ( r ) {
-                    $.post( site_url + 'deliveries/deleteEmployee', { emp_id: row.emp_id }, function(response) {
+                    $.post( site_url + 'deliveries/deleteDelivery', { dr_id: row.dr_id }, function(response) {
                         if ( response.status == 'success' ) {
                             $.messager.alert('Message', 'Success', 'info', function(){
                                 $('#dg-deliveries').datagrid('reload');
