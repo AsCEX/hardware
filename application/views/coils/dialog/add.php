@@ -5,6 +5,7 @@
 
     <div id="cc" class="easyui-layout" fit="true" style="height:450px;">
         <div data-options="region:'center',title:'Coil Info'" style="padding:5px;">
+            <input name="coil_drd_id" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_dr_id) ? $coils->coil_dr_id : $dr_id; ?>">
             <div class="fitem">
                 <label>Coil Code:</label>
                 <input name="coil_code" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_code) ? $coils->coil_code : ""; ?>">
@@ -38,20 +39,6 @@
                 <label>Date Created:</label>
                 <input name="coil_created_date" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_created_date) ? $coils->coil_created_date : ""; ?>">
             </div-->
-        </div>
-        <div data-options="region:'east',title:'Creator Info',split:false,hideCollapsedContent:false" style="padding:5px;width:50%;">
-            <div class="fitem">
-                <label>Firstname:</label>
-                <input readonly name="ui_firstname" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->ui_firstname) ? $coils->ui_firstname : $userInfo['ui_firstname']; ?>">
-            </div>
-            <div class="fitem">
-                <label>Middle Name:</label>
-                <input readonly name="ui_middlename" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->ui_middlename) ? $coils->ui_middlename :  $userInfo['ui_middlename']; ?>">
-            </div>
-            <div class="fitem">
-                <label>Lastname:</label>
-                <input readonly name="ui_lastname" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->ui_lastname) ? $coils->ui_lastname : $userInfo['ui_lastname']; ?>">
-            </div>
         </div>
     </div>
 

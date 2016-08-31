@@ -48,78 +48,68 @@ class Deliveries_model extends CI_Model
         return $rs->row();
 
     }
-/*
-    public function save( $data, $emp_id = null, $emp_ui_id = null ) {
 
-        $ui_id = $this->saveUserInfo( $data, $emp_ui_id );
+    public function save( $data, $dr_id = null) {
 
-        $data = array(
-            'emp_ui_id'     => $ui_id,
-            'emp_username'  => $data['emp_username'],
-            'emp_password'  => $data['emp_password'],
-            'emp_status'    => 1,
-            'emp_rate'      => $data['emp_rate']
-        );
+        if ( $dr_id ) {
 
-        if ( $emp_id ) {
+            $this->db->where("dr_id", $data['dr_id']);
+            $this->db->update($this->tbl_deliveries, $data);
 
-            $this->db->where("emp_id", $data['emp_id']);
-            $this->db->update($this->tbl_employees, $data);
-
-            return $emp_id;
+            return $dr_id;
 
         } else {
 
-            $employee = $this->db->insert($this->tbl_employees, $data);
+            $delivery = $this->db->insert($this->tbl_deliveries, $data);
 
-            if ( $employee ) {
+            if ( $delivery ) {
                 return $this->db->insert_id();
             } else {
                 return false;
             }
         }
     }
+    /*
+        public function saveUserInfo( $data, $emp_ui_id = null ) {
 
-    public function saveUserInfo( $data, $emp_ui_id = null ) {
+            $userData = array(
+                'ui_firstname'      => $data['ui_firstname'],
+                'ui_middlename'     => $data['ui_middlename'],
+                'ui_lastname'       => $data['ui_lastname'],
+                'ui_extname'        => $data['ui_extname'],
+                'ui_address'        => $data['ui_address'],
+                'ui_address2'       => $data['ui_address2'],
+                'ui_zip'            => $data['ui_zip'],
+                'ui_contact_number' => $data['ui_contact_number'],
+            );
 
-        $userData = array(
-            'ui_firstname'      => $data['ui_firstname'],
-            'ui_middlename'     => $data['ui_middlename'],
-            'ui_lastname'       => $data['ui_lastname'],
-            'ui_extname'        => $data['ui_extname'],
-            'ui_address'        => $data['ui_address'],
-            'ui_address2'       => $data['ui_address2'],
-            'ui_zip'            => $data['ui_zip'],
-            'ui_contact_number' => $data['ui_contact_number'],
-        );
+            if ( $emp_ui_id ) {
 
-        if ( $emp_ui_id ) {
+                $this->db->where('ui_id', $data['emp_ui_id']);
+                $this->db->update($this->tbl_user_info, $userData);
 
-            $this->db->where('ui_id', $data['emp_ui_id']);
-            $this->db->update($this->tbl_user_info, $userData);
+                return $emp_ui_id;
 
-            return $emp_ui_id;
-
-        } else {
-
-            $userInfo = $this->db->insert($this->tbl_user_info, $userData);
-
-            if ( $userInfo ){
-                return $this->db->insert_id();
             } else {
-                return false;
+
+                $userInfo = $this->db->insert($this->tbl_user_info, $userData);
+
+                if ( $userInfo ){
+                    return $this->db->insert_id();
+                } else {
+                    return false;
+                }
             }
         }
-    }
 
-    public function delete( $data ) {
+        public function delete( $data ) {
 
-        $this->db->set( "emp_status", 0 );
-        $this->db->where( "emp_id", $data['emp_id'] );
-        $this->db->update( $this->tbl_employees );
+            $this->db->set( "emp_status", 0 );
+            $this->db->where( "emp_id", $data['emp_id'] );
+            $this->db->update( $this->tbl_employees );
 
-        if ( $this->db->affected_rows() > 0 ) return TRUE;
-        else return FALSE;
-    }
-*/
+            if ( $this->db->affected_rows() > 0 ) return TRUE;
+            else return FALSE;
+        }
+    */
 }

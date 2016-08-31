@@ -3,6 +3,8 @@ var delivery_details = {
 
     init: function() {
         this.datagrid();
+
+
         //this.dialog();
     },
 

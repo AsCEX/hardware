@@ -25,10 +25,10 @@ class Deliveries extends MY_Controller {
             ->set_output(json_encode($resultSet) );
     }
 
-    public function saveDeliveries() {
+    public function saveDelivery() {
 
         $post = $_POST;
-        $emp_id = $this->employees_model->save($post, $post['emp_id'], $post['emp_ui_id']);
+        $emp_id = $this->deliveries_model->save($post, $post['dr_id']);
 
         if ( $emp_id ) {
 
@@ -40,7 +40,7 @@ class Deliveries extends MY_Controller {
 
     public function deleteDeliveries() {
 
-        $delEmp = $this->employees_model->delete( $_POST );
+        $delEmp = $this->deliveries_model->delete( $_POST );
 
         if ( $delEmp ) {
 
@@ -54,7 +54,7 @@ class Deliveries extends MY_Controller {
 
         $dr = $this->deliveries_model->getDeliveryById( $dr_id );
 
-        $data['employee'] = ($dr) ? $dr : array();
+        $data['delivery'] = ($dr) ? $dr : array();
 
         $this->load->view('deliveries/dialog/add', $data);
     }

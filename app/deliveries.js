@@ -45,10 +45,7 @@ var deliveries = {
                         {field:'dr_id',title:'Delivery Number',width:'10%'},
                         {field:'supp_company',title:'Company',width:'10%'},
                         {field:'fullname',title:'Owner',width:'10%'},
-                        {field:'ui_address',title:'Address',width:'20%'},
-                        {field:'ui_address2',title:'Address 2',width:'20%'},
-                        {field:'ui_zip',title:'Zip',width:'5%'},
-                        {field:'ui_contact_number',title:'Contact',width:'10%'}
+                        {field:'dr_delivery_date',title:'Delivery Date',width:'20%'},
                     ]
                 ]
             }).datagrid('clientPaging');
@@ -82,7 +79,7 @@ var deliveries = {
 
     save: function() {
         $('#fm-deliveries').form('submit',{
-            url: site_url + 'deliveries/saveEmployee',
+            url: site_url + 'deliveries/saveDelivery',
             onSubmit: function(){
                 return $(this).form('validate');
             },
@@ -100,7 +97,7 @@ var deliveries = {
         var row = $('#dg-deliveries').datagrid('getSelected');
         console.log(row);
         if (row){
-            $('#dlg-deliveries').dialog('open').dialog('refresh', site_url + 'deliveries/dialog/' + row.emp_id).dialog('center').dialog('setTitle','Edit');
+            $('#dlg-deliveries').dialog('open').dialog('refresh', site_url + 'deliveries/dialog/' + row.dr_id).dialog('center').dialog('setTitle','Edit');
             $('#fm-deliveries').form('load',row);
         }
     },

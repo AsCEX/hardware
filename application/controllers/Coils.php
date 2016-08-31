@@ -12,12 +12,14 @@ class Coils extends MY_Controller {
 
   public function index()
   {
-    $this->load->view('coils/default');
+    $dr_id = isset($_GET['dr_id']) ? $_GET['dr_id'] : -1;
+    $data['dr_id'] = $dr_id;
+    $this->load->view('coils/default', $data);
   }
 
-  public function getCoilsGrid() 
+  public function getCoilsGrid($dr_id = null)
   {
-    $coils = $this->coils_model->getCoilsGrid();
+    $coils = $this->coils_model->getCoilsGrid($dr_id);
     $resultSet['rows'] = $coils;
     $resultSet['total'] = count($coils);
     $this->output
@@ -25,10 +27,11 @@ class Coils extends MY_Controller {
       ->set_output(json_encode($resultSet));
   }
 
-  public function saveCoil() 
+  public function saveCoil($temp = false)
   {
     $post = $_POST;
-    $coil_id = $this->coils_model->save($post, $post['coil_id'], $post['coil_created_by']);
+    $coil_id = $this->coils_model->save($post, $post['coil_id'], $temp);
+
     if ( $coil_id ) {
       $this->output
         ->set_content_type('application/json')
@@ -52,6 +55,7 @@ class Coils extends MY_Controller {
     $coil = $this->coils_model->getCoilById( $coil_id );
     $data['coils'] = ($coil) ? $coil : array();
     $data['colors'] = $this->colors_model->getColorsGrid();
+    $data['drd_id'] = isset($_GET['drd_id']) ? $_GET['drd_id'] : 0;
     $this->load->view('coils/dialog/add', $data);
   }
 }
