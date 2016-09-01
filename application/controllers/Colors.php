@@ -58,6 +58,31 @@ class Colors extends MY_Controller {
                 ->set_output( json_encode( array( 'status' => 'success' ) ) );
         }
     }
+
+    public function getColorsComboBox( $clr_id = null) {
+
+        $colors = $this->colors_model->getColorsGrid();
+
+        $color_data = array();
+
+        foreach ($colors as $color) {
+
+            $temp = array(
+                'name' => $color->clr_id,
+                'value' => $color->clr_name
+            );
+
+            if ($color->clr_id == $clr_id) {
+                $temp['selected'] = true;
+            }
+
+            $color_data[] = $temp;
+        }
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($color_data) );
+    }
 }
 
 ?>
