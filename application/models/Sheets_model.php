@@ -47,7 +47,8 @@ class Sheets_model extends CI_Model
             sht_length,
             sht_height,
             sht_width,
-            sht_clr_id
+            sht_clr_id,
+            clr_name
         ");
 
         $this->db->join($this->tbl_coils, "sht_coil_id = coil_id", "left");

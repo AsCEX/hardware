@@ -48,6 +48,7 @@ var sheets = {
                     [
                         {field:'sht_code',title:'Code',width:'10%'},
                         {field:'coil_code',title:'Coil',width:'10%'},
+                        {field:'clr_name',title:'Color',width:'10%'},
                         {field:'sht_length',title:'Length',width:'10%'},
                         {field:'sht_height',title:'Height',width:'10%'},
                         {field:'sht_width',title:'Width',width:'10%'},
