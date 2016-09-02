@@ -12,7 +12,7 @@
                 <div class="fitem">
                     <label>Customer:</label>
                     <select id="po_cust_id" class="easyui-combobox" style="width:180px;" name="po_cust_id" editable="false" >
-                        <option value="" disabled selected>Select Supplier</option>
+                        <option value="" disabled selected>Select Customer</option>
                         <?php if($customers) { ?>
                             <?php foreach ($customers as $customer) {
                                 $selected = ($customer->cust_id === $po->po_cust_id)? "selected": "";

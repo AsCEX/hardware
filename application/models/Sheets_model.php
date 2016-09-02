@@ -36,7 +36,7 @@ class Sheets_model extends CI_Model
 
     }
 
-    public function getSheetsGrid() {
+    public function getSheetsGrid($po_id = null) {
 
         $this->db->select("
             coil_id,
