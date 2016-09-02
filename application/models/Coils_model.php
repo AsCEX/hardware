@@ -41,28 +41,22 @@ class Coils_model extends CI_Model {
       return $rs->row();
     }
 
-    public function save( $data, $coil_id = null, $temp = false )
+    public function save( $data, $coil_id = null)
     {
-       if($temp){
+       if ( $coil_id ) {
+           $this->db->where("coil_id", $coil_id);
+           $this->db->update($this->tbl_coils, $data);
+           return $coil_id;
+       } else {
 
-           $deliveries = $this->session->userdata('deliveries');
+           $data['coil_created_by'] = $this->session->userdata('emp_id');
+           $data['coil_created_date'] = date('Y-m-d H:i:s');
 
-           $deliveries[] = $data;
-
-           $this->session->set_userdata('deliveries', $deliveries);
-
-       }else{
-           if ( $coil_id ) {
-               $this->db->where("coil_id", $coil_id);
-               $this->db->update($this->tbl_coils, $data);
-               return $coil_id;
+           $coils = $this->db->insert($this->tbl_coils, $data);
+           if ( $coils ) {
+               return $this->db->insert_id();
            } else {
-               $coils = $this->db->insert($this->tbl_coils, $data);
-               if ( $coils ) {
-                   return $this->db->insert_id();
-               } else {
-                   return false;
-               }
+               return false;
            }
        }
 

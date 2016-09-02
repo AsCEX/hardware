@@ -1,39 +1,37 @@
 
-var delivery_details = {
+var po = {
 
     init: function() {
         this.datagrid();
-
-
-        //this.dialog();
+        this.dialog();
     },
 
     datagrid: function() {
         using('plugins/jquery.client.paging.js', function(){
-            $('#drd-grid').datagrid({
-                url: site_url + "deliveries/getDeliveriesGrid",
+            $('#dg-po').datagrid({
+                url: site_url + "purchase_orders/getPOGrid",
                 toolbar: [
                     {
-                        text: 'Add Delivery',
+                        text: 'Add Order',
                         iconCls: 'icon-add',
                         handler: function() {
-                            deliveries.create();
+                            po.create();
                         }
                     },
                     '-',
                     {
-                        text: 'Edit Delivery',
+                        text: 'Edit Order',
                         iconCls: 'icon-edit',
                         handler: function() {
-                            deliveries.update();
+                            po.update();
                         }
                     },
                     '-',
                     {
-                        text: 'Delete Delivery',
+                        text: 'Delete Order',
                         iconCls: 'icon-remove',
                         handler: function() {
-                            deliveries.delete();
+                            po.delete();
                         }
                     }
                 ],
@@ -44,13 +42,10 @@ var delivery_details = {
                 singleSelect:"true",
                 columns:[
                     [
-                        {field:'dr_id',title:'Delivery Number',width:'10%'},
-                        {field:'supp_company',title:'Company',width:'10%'},
+                        {field:'po_id',title:'PO Number',width:'10%'},
+                        {field:'cust_company',title:'Company',width:'10%'},
                         {field:'fullname',title:'Owner',width:'10%'},
-                        {field:'ui_address',title:'Address',width:'20%'},
-                        {field:'ui_address2',title:'Address 2',width:'20%'},
-                        {field:'ui_zip',title:'Zip',width:'5%'},
-                        {field:'ui_contact_number',title:'Contact',width:'10%'}
+                        {field:'po_date',title:'Purchase Order Date',width:'20%'},
                     ]
                 ]
             }).datagrid('clientPaging');
@@ -58,40 +53,49 @@ var delivery_details = {
     },
 
     dialog: function() {
-        var deliveries = this;
-        $("#dlg-deliveries").dialog({
+        var po = this;
+        $("#dlg-po").dialog({
             resizable: true,
             modal: true,
             closed: true,
             buttons:[{
                 text:'Save',
                 handler:function(){
-                    deliveries.save();
+                    po.save();
                 }
             },{
                 text:'Close',
                 handler:function(){
-                    $("#dlg-deliveries").dialog('close');
+                    $("#dlg-po").dialog('close');
                 }
             }]
         });
     },
 
     create: function(){
-        $('#dlg-deliveries').dialog('open').dialog('refresh', site_url + 'deliveries/dialog').dialog('center').dialog('setTitle','New');
-        $('#fm-deliveries').form('clear');
+        $('#dlg-po').dialog('open').dialog('refresh', site_url + 'purchase_orders/dialog').dialog('center').dialog('setTitle','New');
+        $('#fm-po').form('clear');
     },
 
     save: function() {
-        $('#fm-deliveries').form('submit',{
-            url: site_url + 'deliveries/saveEmployee',
+
+        var sheets = $("#dg-sheets").datagrid('getRows');
+        var sheet_ids = [];
+        for(var i=0;i<sheets.length;i++){
+            sheet_ids.push(sheets[i].sht_id);
+        }
+
+        $("#po_sheet_ids").val(JSON.stringify(sheet_ids));
+
+        $('#fm-po').form('submit',{
+            url: site_url + 'purchase_orders/savePO',
             onSubmit: function(){
                 return $(this).form('validate');
             },
             success: function(response){
                 $.messager.alert('Message','Successful', 'info', function(){
-                    $('#dlg-deliveries').dialog('close');
-                    $('#drd-grid').datagrid('reload');
+                    $('#dlg-po').dialog('close');
+                    $('#dg-po').datagrid('reload');
                 });
             }
         });
@@ -99,24 +103,24 @@ var delivery_details = {
 
     update: function(){
 
-        var row = $('#drd-grid').datagrid('getSelected');
+        var row = $('#dg-po').datagrid('getSelected');
         console.log(row);
         if (row){
-            $('#dlg-deliveries').dialog('open').dialog('refresh', site_url + 'deliveries/dialog/' + row.emp_id).dialog('center').dialog('setTitle','Edit');
-            $('#fm-deliveries').form('load',row);
+            $('#dlg-po').dialog('open').dialog('refresh', site_url + 'purchase_orders/dialog/' + row.po_id).dialog('center').dialog('setTitle','Edit');
+            $('#fm-po').form('load',row);
         }
     },
 
     delete: function() {
 
-        var row = $('#drd-grid').datagrid('getSelected');
+        var row = $('#dg-po').datagrid('getSelected');
         if ( row ) {
-            $.messager.confirm('Confirm', 'Delete Employee?', function(r) {
+            $.messager.confirm('Confirm', 'Delete Delivery?', function(r) {
                 if ( r ) {
-                    $.post( site_url + 'deliveries/deleteEmployee', { emp_id: row.emp_id }, function(response) {
+                    $.post( site_url + 'purchase_orders/deletePO', { dr_id: row.dr_id }, function(response) {
                         if ( response.status == 'success' ) {
                             $.messager.alert('Message', 'Success', 'info', function(){
-                                $('#drd-grid').datagrid('reload');
+                                $('#dg-po').datagrid('reload');
                             })
                         }
                     }, 'json');

@@ -12,7 +12,7 @@
 
                 <div class="fitem">
                     <label>Supplier:</label>
-                    <select id="dr_supp_id" class="easyui-combobox" style="width:180px;" name="dr_supp_id">
+                    <select id="dr_supp_id" class="easyui-combobox" style="width:180px;" name="dr_supp_id" editable="false" >
                         <option value="" disabled selected>Select Supplier</option>
                         <?php if($suppliers) { ?>
                             <?php foreach ($suppliers as $supplier) {
@@ -26,10 +26,10 @@
 
                 <div class="fitem">
                     <label>Delivery Date:</label>
-                    <input id="dr_delivery_date" type="text" name="dr_delivery_date" class="easyui-datebox" required="required" value="<?php echo isset($delivery->dr_delivery_date) ? $delivery->dr_delivery_date : ''; ?>">
+                    <input id="dr_delivery_date" editable="false" type="text" name="dr_delivery_date" class="easyui-datebox" required="required" value="<?php echo isset($delivery->dr_delivery_date) ? $delivery->dr_delivery_date : ''; ?>">
                 </div>
 
-                <!--<input type="hidden" id="pr_item_json" name="pr_item_json" value="" />-->
+                <input type="hidden" id="dr_coil_ids" name="dr_coil_ids" value="" />
             </div>
         </div>
 
@@ -37,9 +37,9 @@
 
 </form>
 <style>
-    #fm-employees .fitem label { width: 122px; }
+    #fm-deliveries .fitem label { width: 122px; }
 </style>
 
 <script>
-    delivery_details.init();
+    //delivery_details.init();
 </script>

@@ -49,7 +49,7 @@
             </div>
             <div id="transactions" style="width:250px;">
                 <div class="menu-links" data-url="<?php echo site_url('deliveries'); ?>" >Deliveries</div>
-                <div class="menu-links" data-url="<?php echo site_url('purchase_order'); ?>" >Purchased Orders</div>
+                <div class="menu-links" data-url="<?php echo site_url('purchase_orders'); ?>" >Purchased Orders</div>
 
         </div>
         </div>
@@ -82,8 +82,9 @@
 
 <script type="text/javascript" src="<?php echo site_url('app/suppliers.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/deliveries.js') ?>"></script>
-<script type="text/javascript" src="<?php echo site_url('app/delivery_details.js') ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('app/purchase_orders.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/coils.js') ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('app/sheets.js') ?>"></script>
 
 
 <script type="text/javascript">

@@ -36,7 +36,7 @@ class Sheets_model extends CI_Model
 
     }
 
-    public function getSheetsGrid() {
+    public function getSheetsGrid($po_id = null) {
 
         $this->db->select("
             coil_id,
@@ -47,11 +47,20 @@ class Sheets_model extends CI_Model
             sht_length,
             sht_height,
             sht_width,
-            sht_clr_id
+            sht_clr_id,
+            sht_qty,
+            sht_price
         ");
 
         $this->db->join($this->tbl_coils, "sht_coil_id = coil_id", "left");
         $this->db->join($this->tbl_colors, "sht_clr_id = clr_id", "left");
+
+        if($po_id == -1){
+            $this->db->where('sht_po_id !=', 0);
+        }else{
+            $this->db->where('sht_po_id', $po_id);
+        }
+        $this->db->order_by("sht_po_id", "desc");
 
         $res = $this->db->get($this->tbl_sheets);
 
@@ -59,17 +68,19 @@ class Sheets_model extends CI_Model
     }
 
     public function save( $data, $sht_id = null) {
-
+        print_r($data);
+        print_r($sht_id);
         if ( $sht_id ) {
 
             $this->db->where("sht_id", $sht_id);
             $this->db->update($this->tbl_sheets, $data);
-
+        echo $this->db->last_query();
             return $sht_id;
         } else {
 
             $shtId = $this->db->insert($this->tbl_sheets, $data);
 
+            echo $this->db->last_query();
             if ( $shtId ) {
                 return $this->db->insert_id();
             }

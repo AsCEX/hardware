@@ -27,10 +27,10 @@ class Coils extends MY_Controller {
 	  ->set_output(json_encode($resultSet));
   }
 
-  public function saveCoil($temp = false)
+  public function saveCoil()
   {
 	$post = $_POST;
-	$coil_id = $this->coils_model->save($post, $post['coil_id'], $temp);
+	$coil_id = $this->coils_model->save($post, $post['coil_id']);
 
 	if ( $coil_id ) {
 	  $this->output
@@ -55,7 +55,7 @@ class Coils extends MY_Controller {
 	$coil = $this->coils_model->getCoilById( $coil_id );
 	$data['coils'] = ($coil) ? $coil : array();
 	$data['colors'] = $this->colors_model->getColorsGrid();
-	$data['drd_id'] = isset($_GET['drd_id']) ? $_GET['drd_id'] : 0;
+	$data['dr_id'] = isset($_GET['dr_id']) ? $_GET['dr_id'] : 0;
 	$this->load->view('coils/dialog/add', $data);
   }
 
@@ -69,7 +69,8 @@ class Coils extends MY_Controller {
 
           $temp = array(
               'name' => $coil->coil_id,
-              'value' => $coil->coil_code
+              'value' => $coil->coil_code,
+              'color' => $coil->clr_hex
           );
 
           if ($coil->coil_id == $coil_id) {

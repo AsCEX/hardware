@@ -6,6 +6,7 @@ class Deliveries extends MY_Controller {
     public function __construct(){
         parent::__construct();
         $this->load->model('deliveries_model');
+        $this->load->model('coils_model');
         $this->load->model('suppliers_model');
     }
 
@@ -29,9 +30,20 @@ class Deliveries extends MY_Controller {
     public function saveDelivery() {
 
         $post = $_POST;
-        $emp_id = $this->deliveries_model->save($post, $post['dr_id']);
 
-        if ( $emp_id ) {
+        $coil_ids = json_decode( $post['dr_coil_ids'] );
+        unset($post['dr_coil_ids']);
+
+        $dr_id = $this->deliveries_model->save($post, $post['dr_id']);
+
+        if ( $dr_id ) {
+
+            foreach($coil_ids as $coil_id){
+                $coil_data = array(
+                    'coil_dr_id' => $dr_id
+                );
+                $this->coils_model->save($coil_data, $coil_id);
+            }
 
             $this->output
                 ->set_content_type('application/json')

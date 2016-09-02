@@ -9,7 +9,9 @@ class Sheets extends MY_Controller {
     }
 
     public function index() {
-        $this->load->view('sheets/default');
+        $po_id = isset($_GET['po_id']) ? $_GET['po_id'] : -1;
+        $data['po_id'] = $po_id;
+        $this->load->view('sheets/default', $data);
     }
 
     public function dialog( $sht_id = 0 ){
@@ -17,13 +19,14 @@ class Sheets extends MY_Controller {
         $sheet = $this->sheets_model->getSheetById( $sht_id );
 
         $data['sheet'] = ($sheet) ? $sheet : array();
+        $data['po_id'] = isset($_GET['po_id']) ? $_GET['po_id'] : 0;
 
         $this->load->view('sheets/dialog/add', $data);
     }
 
-    public function getSheetsGrid() {
+    public function getSheetsGrid($po_id = null) {
 
-        $sheets = $this->sheets_model->getSheetsGrid();
+        $sheets = $this->sheets_model->getSheetsGrid($po_id);
 
         $resultSet['rows'] = $sheets;
         $resultSet['total'] = count($sheets);

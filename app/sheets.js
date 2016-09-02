@@ -1,6 +1,6 @@
 
 var sheets = {
-
+    po_id: 0,
     init: function() {
         this.datagrid();
         this.dialog();
@@ -11,9 +11,11 @@ var sheets = {
     },
 
     datagrid: function() {
+        that = this;
+
         using('plugins/jquery.client.paging.js', function() {
             $('#dg-sheets').datagrid({
-                url: site_url + "sheets/getSheetsGrid",
+                url: site_url + "sheets/getSheetsGrid/" + that.po_id ,
                 toolbar: [
                     {
                         text: 'Add Sheet',
@@ -51,6 +53,8 @@ var sheets = {
                         {field:'sht_length',title:'Length',width:'10%'},
                         {field:'sht_height',title:'Height',width:'10%'},
                         {field:'sht_width',title:'Width',width:'10%'},
+                        {field:'sht_qty',title:'Qty',width:'10%'},
+                        {field:'sht_price',title:'Price',width:'10%'},
                     ]
                 ]
             }).datagrid('clientPaging');
@@ -78,7 +82,8 @@ var sheets = {
     },
 
     create: function() {
-        $('#dlg-sheets').dialog('open').dialog('refresh', site_url + 'sheets/dialog').dialog('center').dialog('setTitle','New');
+        that = this;
+        $('#dlg-sheets').dialog('open').dialog('refresh', site_url + 'sheets/dialog?po_id=' + that.po_id).dialog('center').dialog('setTitle','New');
         $('#fm-sheets').form('clear');
     },
 
