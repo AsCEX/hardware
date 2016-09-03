@@ -68,14 +68,6 @@ var sheets = {
                                 sheets.delete();
                             }
                         },
-                        '-',
-                        {
-                            text: 'View Sheet',
-                            iconCls: 'icon-add',
-                            handler: function () {
-                                alert("VIEW DETAILS");
-                            }
-                        }
                     ],
 
                     columns:[

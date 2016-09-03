@@ -33,6 +33,14 @@ var po = {
                         handler: function() {
                             po.delete();
                         }
+                    },
+                    '-',
+                    {
+                        text: 'View Order',
+                        iconCls: 'icon-search',
+                        handler: function () {
+                            alert("VIEW DETAILS");
+                        }
                     }
                 ],
                 pagination:true,

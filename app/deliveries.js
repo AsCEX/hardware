@@ -33,6 +33,14 @@ var deliveries = {
                         handler: function() {
                             deliveries.delete();
                         }
+                    },
+                    '-',
+                    {
+                        text: 'View Delivery',
+                        iconCls: 'icon-search',
+                        handler: function () {
+                            alert("VIEW DETAILS");
+                        }
                     }
                 ],
                 pagination:true,

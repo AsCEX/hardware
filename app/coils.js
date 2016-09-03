@@ -68,14 +68,6 @@ var coils = {
               handler: function () {
                 coils.delete();
               }
-            },
-            '-',
-            {
-              text: 'View Coil',
-              iconCls: 'icon-add',
-              handler: function () {
-                alert("VIEW DETAILS");
-              }
             }
           ],
 
