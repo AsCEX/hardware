@@ -28,16 +28,6 @@ var coils = {
 
       if(that.dr_id == -1){
         $('#dg-coils').datagrid({
-          toolbar: [
-            {
-              text: 'View Coil',
-              iconCls: 'icon-add',
-              handler: function () {
-                alert("VIEW DETAILS");
-              }
-            }
-          ],
-
           columns:[
             [
               {field:'coil_id',title:'ID',width:'10%'},
@@ -77,6 +67,14 @@ var coils = {
               iconCls: 'icon-remove',
               handler: function () {
                 coils.delete();
+              }
+            },
+            '-',
+            {
+              text: 'View Coil',
+              iconCls: 'icon-add',
+              handler: function () {
+                alert("VIEW DETAILS");
               }
             }
           ],

@@ -27,16 +27,6 @@ var sheets = {
             if(that.po_id == -1){
 
                 $('#dg-sheets').datagrid({
-                    toolbar: [
-                        {
-                            text: 'View Coil',
-                            iconCls: 'icon-add',
-                            handler: function () {
-                                alert("VIEW DETAILS");
-                            }
-                        }
-                    ],
-
                     columns:[
                         [
                             {field:'sht_code',title:'Code',width:'10%'},
@@ -76,6 +66,14 @@ var sheets = {
                             iconCls: 'icon-remove',
                             handler: function() {
                                 sheets.delete();
+                            }
+                        },
+                        '-',
+                        {
+                            text: 'View Sheet',
+                            iconCls: 'icon-add',
+                            handler: function () {
+                                alert("VIEW DETAILS");
                             }
                         }
                     ],
