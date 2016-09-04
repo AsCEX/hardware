@@ -55,9 +55,7 @@
         </div>
 
         <div region="center">
-            <div id="main-content" class="easyui-panel" title="" fit="true" border="false" style="" >
-                <?php echo $this->session->userdata('emp_id'); ?>
-            </div>
+            <div id="main-content" class="easyui-panel" title="" fit="true" border="false" style="" ></div>
         </div>
 
 
