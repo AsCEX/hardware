@@ -33,6 +33,14 @@ var deliveries = {
                         handler: function() {
                             deliveries.delete();
                         }
+                    },
+                    '-',
+                    {
+                        text: 'View Delivery',
+                        iconCls: 'icon-search',
+                        handler: function () {
+                            alert("VIEW DETAILS");
+                        }
                     }
                 ],
                 pagination:true,
@@ -78,6 +86,16 @@ var deliveries = {
     },
 
     save: function() {
+
+        var coils = $("#dg-coils").datagrid('getRows');
+        var coil_ids = [];
+        for(var i=0;i<coils.length;i++){
+            coil_ids.push(coils[i].coil_id);
+        }
+
+        $("#dr_coil_ids").val(JSON.stringify(coil_ids));
+
+
         $('#fm-deliveries').form('submit',{
             url: site_url + 'deliveries/saveDelivery',
             onSubmit: function(){
@@ -95,7 +113,7 @@ var deliveries = {
     update: function(){
 
         var row = $('#dg-deliveries').datagrid('getSelected');
-        console.log(row);
+
         if (row){
             $('#dlg-deliveries').dialog('open').dialog('refresh', site_url + 'deliveries/dialog/' + row.dr_id).dialog('center').dialog('setTitle','Edit');
             $('#fm-deliveries').form('load',row);

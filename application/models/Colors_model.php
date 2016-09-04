@@ -37,13 +37,8 @@ class Colors_model extends CI_Model {
             return $clrId;
         } else {
 
-            $colorId = $this->db->insert($this->tbl_colors, $data);
-
-            if ( $colorId ) {
-                return $this->db->insert_id();
-            } else {
-                return false;
-            }
+            if ( $this->db->insert($this->tbl_colors, $data) ) return TRUE;
+            else return FALSE;
         }
     }
 

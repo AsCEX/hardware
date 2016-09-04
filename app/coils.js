@@ -40,11 +40,15 @@ var coils = {
 
           columns:[
             [
+              {field:'coil_id',title:'ID',width:'10%'},
               {field:'coil_code',title:'Coil Code',width:'15%'},
               {field:'coil_length',title:'Length',width:'10%'},
               {field:'coil_height',title:'Height',width:'10%'},
               {field:'coil_width',title:'Width',width:'10%'},
-              {field:'clr_name',title:'Color',width:'20%'},
+              {field:'clr_name',title:'Color',width:'20%',
+                formatter: function(value,row,index){
+                  return "<i class='fa fa-square' style='color: " + row.clr_hex + ";'></i> " + row.clr_name.replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
+                }},
               {field:'supp_company',title:'Company',width:'20%'},
             ]
           ]
@@ -79,11 +83,18 @@ var coils = {
 
           columns:[
             [
-              {field:'coil_code',title:'Coil Code',width:'15%'},
-              {field:'coil_length',title:'Length',width:'10%'},
-              {field:'coil_height',title:'Height',width:'10%'},
-              {field:'coil_width',title:'Width',width:'10%'},
-              {field:'clr_name',title:'Color',width:'20%'},
+              {field:'coil_id',title:'ID',width:'10%'},
+              {field:'coil_code',title:'Coil Code',width:'15%',align:'right'},
+              {field:'coil_length',title:'Length',width:'10%',align:'right'},
+              {field:'coil_height',title:'Height',width:'10%',align:'right'},
+              {field:'coil_width',title:'Width',width:'10%',align:'right'},
+              {field:'clr_name',title:'Color',width:'15%',
+                formatter: function(value,row,index){
+                  return "<i class='fa fa-square' style='color: " + row.clr_hex + ";'></i> " + row.clr_name.replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
+                },
+              },
+              {field:'coil_qty',title:'Qty',width:'10%',align:'right'},
+              {field:'coil_price',title:'Price',width:'15%',align:'right'},
             ]
           ],
         });
@@ -115,7 +126,7 @@ var coils = {
 
   create: function() {
     that = this;
-    $('#dlg-coils').dialog('open').dialog('refresh', site_url + 'coils/dialog?drd_id=' + that.dr_id).dialog('center').dialog('setTitle','New');
+    $('#dlg-coils').dialog('open').dialog('refresh', site_url + 'coils/dialog?dr_id=' + that.dr_id).dialog('center').dialog('setTitle','New');
     $('#fm-coils').form('clear');
   },
 
