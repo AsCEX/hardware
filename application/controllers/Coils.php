@@ -49,13 +49,17 @@ class Coils extends MY_Controller {
     }
   }
 
-  public function dialog($coil_id = 0)
+  public function dialog($coil_id = 0, $state = false)
   {
     $data['userInfo'] = $this->session->userdata();
     $coil = $this->coils_model->getCoilById( $coil_id );
     $data['coils'] = ($coil) ? $coil : array();
     $data['colors'] = $this->colors_model->getColorsGrid();
     $data['drd_id'] = isset($_GET['drd_id']) ? $_GET['drd_id'] : 0;
-    $this->load->view('coils/dialog/add', $data);
+    if($state) {
+      $this->load->view('coils/dialog/view', $data);
+    } else {
+      $this->load->view('coils/dialog/add', $data);
+    }
   }
 }

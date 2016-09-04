@@ -33,7 +33,7 @@ var coils = {
               text: 'View Coil',
               iconCls: 'icon-add',
               handler: function () {
-                alert("VIEW DETAILS");
+                coils.view();
               }
             }
           ],
@@ -95,7 +95,7 @@ var coils = {
   },
 
   dialog: function() {
-    $("#dlg-coils").dialog({
+    $("#dlg-coils,#dlg-coils-view").dialog({
       resizable: true,
       modal: true,
       closed: true,
@@ -107,7 +107,7 @@ var coils = {
       },{
         text:'Close',
         handler:function() {
-          $("#dlg-coils").dialog('close');
+          $("#dlg-coils,#dlg-coils-view").dialog('close');
         }
       }]
     });
@@ -158,5 +158,12 @@ var coils = {
         }
       })
     }
+  },
+
+  view: function() {
+    var row = $('#dg-coils').datagrid('getSelected');
+    if (row) {
+      $('#dlg-coils-view').dialog('open').dialog('refresh', site_url + 'coils/dialog/' + row.coil_id + '/true').dialog('center').dialog('setTitle','Coil Details');
+    }
   }
-}
+};
