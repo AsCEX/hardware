@@ -30,7 +30,8 @@
                     <?php foreach ($colors as $color) { 
                             $selected = ($color->clr_id === $coils->coil_clr_id)? "selected": "";
                         ?>
-                      <option value="<?php echo $color->clr_id; ?>" <?php echo $selected;?> ><?php echo $color->clr_name; ?></option>
+                          <i class='fa fa-square' style='color: <?php echo $color->clr_hex; ?>'></i>
+                          <?php echo $color->clr_name; ?></option>
                     <?php } ?>
                   <?php } ?>
                 </select>

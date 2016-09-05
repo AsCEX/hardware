@@ -1,8 +1,8 @@
 <style>
-    table, th, td {
+    table.striped, th, td {
         border: none;
     }
-    table {
+    table.striped {
         width: 100%;
         display: table;
     }
