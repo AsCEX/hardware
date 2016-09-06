@@ -39,7 +39,7 @@ var po = {
                         text: 'View Order',
                         iconCls: 'icon-search',
                         handler: function () {
-                            alert("VIEW DETAILS");
+                            po.view();
                         }
                     }
                 ],
@@ -134,6 +134,14 @@ var po = {
                     }, 'json');
                 }
             })
+        }
+    },
+
+    view: function() {
+        var row = $('#dg-po').datagrid('getSelected');
+        if ( row ) {
+            var url = site_url + 'purchase_orders/print/' + row.po_id;
+            window.open(url, "_blank");
         }
     }
 

@@ -72,4 +72,23 @@ class Purchase_orders extends MY_Controller {
         $data['po'] = ($po) ? $po : array();
         $this->load->view('purchase_orders/dialog/add', $data);
     }
+
+    /**
+     * @param $po_id
+     */
+    public function print( $po_id ) {
+
+        $customer = $this->purchase_orders_model->getCustomerCompanyByPOId( $po_id );
+
+        $po = $this->purchase_orders_model->getPOById( $po_id );
+        $po->po_date = date("F d, Y", strtotime($po->po_date));
+
+        $sheets = $this->sheets_model->getItemsToPrintByPOId( $po_id );
+
+        $data['cust_company'] =  $customer->cust_company;
+        $data['po'] = ($po) ? $po : array();
+        $data['sheets'] = ($sheets) ? $sheets : array();
+
+        $this->load->view('purchase_orders/print/index', $data);
+    }
 }

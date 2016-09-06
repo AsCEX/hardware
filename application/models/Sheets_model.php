@@ -95,6 +95,25 @@ class Sheets_model extends CI_Model
         else return FALSE;
     }
 
+    public function getItemsToPrintByPOId( $po_id ) {
+
+        $this->db->select("
+            coil_code,
+            sht_code,
+            sht_length,
+            sht_height,
+            sht_width,
+            sht_qty,
+            sht_price
+        ");
+        $this->db->where("sht_po_id", $po_id);
+        $this->db->join($this->tbl_coils, "sht_coil_id = coil_id", "left");
+
+        $res = $this->db->get($this->tbl_sheets);
+
+        return $res->result();
+    }
+
 }
 
 ?>
