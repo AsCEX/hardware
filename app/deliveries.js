@@ -4,6 +4,7 @@ var deliveries = {
     init: function() {
         this.datagrid();
         this.dialog();
+        this.dialogView();
     },
 
     datagrid: function() {
@@ -39,7 +40,7 @@ var deliveries = {
                         text: 'View Delivery',
                         iconCls: 'icon-search',
                         handler: function () {
-                            alert("VIEW DETAILS");
+                            deliveries.view();
                         }
                     }
                 ],
@@ -58,6 +59,26 @@ var deliveries = {
                 ]
             }).datagrid('clientPaging');
         })
+    },
+
+    dialogView: function() {
+        var deliveries = this;
+        $("#dlg-coils-view").dialog({
+            resizable: true,
+            modal: true,
+            closed: true,
+            buttons:[{
+                text:'Print',
+                handler:function(){
+                    alert("PRINT ACTION");
+                }
+            },{
+                text:'Close',
+                handler:function(){
+                    $("#dlg-coils-view").dialog('close');
+                }
+            }]
+        });
     },
 
     dialog: function() {
@@ -136,6 +157,14 @@ var deliveries = {
                 }
             })
         }
+    },
+
+    view: function() {
+        var row = $('#dg-deliveries').datagrid('getSelected');
+        console.log(row.dr_id);
+        if (row) {
+            $('#dlg-coils-view').dialog('open').dialog('refresh', site_url + 'deliveries/deliveryDetails/' + row.dr_id).dialog('center').dialog('setTitle','Delivery Details');
+        }
     }
 
-}
+};

@@ -69,4 +69,14 @@ class Coils_model extends CI_Model {
       if ( $this->db->affected_rows() > 0 ) return TRUE;
       else return FALSE;
     }
+
+    public function getCoilDetailsByDeliveryId($dr_id) {
+        $this->db->select('*');
+        $this->db->from($this->tbl_coils);
+        $this->db->join('colors', 'colors.clr_id=coils.coil_clr_id', 'left');
+        $this->db->join('user_informations', 'user_informations.ui_id=coils.coil_created_by', 'left');
+        $this->db->where("coils.coil_dr_id", $dr_id);
+        $rs = $this->db->get();
+        return $rs->result();
+    }
 }

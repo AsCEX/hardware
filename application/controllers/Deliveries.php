@@ -63,7 +63,7 @@ class Deliveries extends MY_Controller {
         }
     }
 
-    public function dialog( $dr_id = 0 ){
+    public function dialog( $dr_id = 0){
         $dr = $this->deliveries_model->getDeliveryById( $dr_id );
         if($dr) {
             $dr->dr_delivery_date = date("m/d/Y", strtotime($dr->dr_delivery_date));
@@ -71,5 +71,15 @@ class Deliveries extends MY_Controller {
         $data['suppliers'] =  $this->suppliers_model->getSuppliersGrid();
         $data['delivery'] = ($dr) ? $dr : array();
         $this->load->view('deliveries/dialog/add', $data);
+    }
+
+    public function deliveryDetails($dr_id =0) {
+      $coils = $this->coils_model->getCoilDetailsByDeliveryId($dr_id);
+      $deliveryDetails = $this->deliveries_model->getDeliveryById($dr_id);
+      $supplier = $this->suppliers_model->getSupplierById($deliveryDetails->dr_supp_id);
+      $data['supplier'] = ($supplier) ? $supplier : array();
+      $data['delivery'] = ($deliveryDetails) ? $deliveryDetails : array();
+      $data['coils'] = ($coils) ? $coils : array();
+      $this->load->view('deliveries/dialog/view', $data);
     }
 }

@@ -3,6 +3,7 @@ var coils = {
   init: function() {
     this.datagrid();
     this.dialog();
+    this.dialogView();
   },
 
   datagrid: function() {
@@ -106,7 +107,7 @@ var coils = {
   },
 
   dialog: function() {
-    $("#dlg-coils,#dlg-coils-view").dialog({
+    $("#dlg-coils").dialog({
       resizable: true,
       modal: true,
       closed: true,
@@ -118,7 +119,27 @@ var coils = {
       },{
         text:'Close',
         handler:function() {
-          $("#dlg-coils,#dlg-coils-view").dialog('close');
+          $("#dlg-coils").dialog('close');
+        }
+      }]
+    });
+  },
+
+  dialogView: function() {
+    var deliveries = this;
+    $("#dlg-coils-view").dialog({
+      resizable: true,
+      modal: true,
+      closed: true,
+      buttons:[{
+        text:'Print',
+        handler:function(){
+          alert("PRINT ACTION");
+        }
+      },{
+        text:'Close',
+        handler:function(){
+          $("#dlg-coils-view").dialog('close');
         }
       }]
     });

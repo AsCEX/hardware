@@ -12,7 +12,7 @@ class Colors_model extends CI_Model {
 
     public function getColorsGrid() {
 
-        $this->db->select("clr_id,clr_name,clr_hex");
+        $this->db->select("*");
         $colors = $this->db->get($this->tbl_colors);
 
         return $colors->result();

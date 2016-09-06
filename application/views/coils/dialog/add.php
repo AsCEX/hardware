@@ -1,5 +1,4 @@
 <form id="fm-coils" method="post" novalidate>
-
     <input type="hidden" name="coil_id" value="<?php echo isset($coils->coil_id) ? $coils->coil_id : ""; ?>" />
     <!--<input type="hidden" name="coil_created_by" value="<?php /*echo isset($coils->coil_created_by) ? $coils->coil_created_by : $userInfo['ui_id']; */?>" />-->
 
@@ -24,14 +23,15 @@
             </div>
             <div class="fitem">
                 <label>Color:</label>
-                <select name="coil_clr_id" class="easyui-combobox" editable="false">
-                  <option value="" disabled selected>Select Color</option>
+                <select name="coil_clr_id" editable="false">
+                  <option value="" disabled>Select Color</option>
                   <?php if($colors) { ?>
-                    <?php foreach ($colors as $color) { 
+                    <?php foreach ($colors as $color) {
                             $selected = ($color->clr_id === $coils->coil_clr_id)? "selected": "";
-                        ?>
-                          <i class='fa fa-square' style='color: <?php echo $color->clr_hex; ?>'></i>
-                          <?php echo $color->clr_name; ?></option>
+                          ?>
+                          <option value="<?php echo $color->clr_id;?>" <?php echo $selected;?>>
+                            <?php echo $color->clr_name; ?>
+                          </option>
                     <?php } ?>
                   <?php } ?>
                 </select>
