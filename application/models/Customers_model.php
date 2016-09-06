@@ -50,7 +50,7 @@ class Customers_model extends CI_Model
         if ( $cust_id ) {
 
             $data['cust_modified_date']  = date("Y-m-d h:i:s");
-            $data['cust_modified_by']    = 1;
+            $data['cust_modified_by']    = $this->session->userdata('emp_id');
 
             $this->db->where("cust_id", $cust_id);
             $this->db->update($this->tbl_customers, $data);
@@ -60,7 +60,7 @@ class Customers_model extends CI_Model
         } else {
 
             $data['cust_created_date']  = date("Y-m-d h:i:s");
-            $data['cust_created_by']    = 1;
+            $data['cust_created_by']    = $this->session->userdata('emp_id');
 
             $cusomter = $this->db->insert($this->tbl_customers, $data);
 
