@@ -1,25 +1,8 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-	<meta charset="UTF-8">
-	
-	<title>Metal for a Change</title>
-
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/print/style.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/print/print.css') ?>">
-	<!-- 
-	<script type='text/javascript' src='js/jquery-1.3.2.min.js'></script>
-	<script type='text/javascript' src='js/example.js'></script>
-	-->
-
-</head>
-
-<body>
-
+<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/print/style.css') ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/print/print.css') ?>">
 	<div id="page-wrap">
 
-		<p id="header">INVOICE</p>
+		<p id="header">Purchase Order</p>
 
 		<div class="right">
 			<p>Date: <?php echo date('F d, Y'); ?></p>
@@ -28,12 +11,14 @@
 		<div style="clear:both"></div>
 		
 		<div id="customer">
+			<div style="float:left;width:30%">
+				<p id="customer-title"><?php echo $cust_company; ?></p><div style="clear:both;"></div>
+				<div id="customer-name"><?php echo $customer->ui_firstname . ' ' . $customer->ui_lastname; ?></div>
+			</div>
 
-            <p id="customer-title"><?php echo $cust_company; ?></p>
-
-            <table id="meta">
+            <table id="meta" border="1" style="border-collapse: collapse;">
                 <tr>
-                    <td class="meta-head">Invoice #</td>
+                    <td class="meta-head">PO Number:</td>
                     <td><p><?php echo $po->po_id; ?></p></td>
                 </tr>
                 <tr>
@@ -64,11 +49,11 @@
 			<tr class="item-row">
 				<td><?php echo $sheet->coil_code; ?></td>
 				<td><?php echo $sheet->sht_code; ?></td>
-				<td><?php echo $sheet->sht_length; ?></td>
-				<td><?php echo $sheet->sht_height; ?></td>
-				<td><?php echo $sheet->sht_width; ?></td>
-				<td><?php echo $sheet->sht_qty; ?></td>
-				<td><?php echo $sheet->sht_price; ?></td>
+				<td align="right"><?php echo $sheet->sht_length; ?></td>
+				<td align="right"><?php echo $sheet->sht_height; ?></td>
+				<td align="right"><?php echo $sheet->sht_width; ?></td>
+				<td align="right"><?php echo $sheet->sht_qty; ?></td>
+				<td align="right"><?php echo number_format($sheet->sht_price, 2); ?></td>
 			</tr>
 
 			<?php endforeach; ?>
@@ -76,13 +61,13 @@
 			<tr id="subtotal">
 				<td colspan="4" class="blank"> </td>
 				<td colspan="2" class="total-line">Subtotal</td>
-				<td class="total-value"><div id="subtotal">P <?php echo number_format($price, 2); ?></div></td>
+				<td class="total-value" align="right"><div id="subtotal">P <?php echo number_format($price, 2); ?></div></td>
 			</tr>
 
 			<tr>
 				<td colspan="4" class="blank"> </td>
 				<td colspan="2" class="total-line">Total</td>
-				<td class="total-value total"><div id="total">P <?php echo number_format($price, 2); ?></div></td>
+				<td class="total-value total" align="right"><div id="total">P <?php echo number_format($price, 2); ?></div></td>
 			</tr>
 		
 		</table>
@@ -93,7 +78,3 @@
 		</div>
 		-->
 	</div>
-	
-</body>
-
-</html>

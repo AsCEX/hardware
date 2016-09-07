@@ -83,9 +83,10 @@ class Purchase_orders_model extends CI_Model
 
     public function getCustomerCompanyByPOId( $po_id ) {
 
-        $this->db->select("cust_company");
+        $this->db->select("*");
         $this->db->where("po_id", $po_id);
         $this->db->join($this->tbl_customers, "cust_id = po_cust_id", "left");
+        $this->db->join($this->tbl_user_info, "cust_ui_id = ui_id", "left");
 
         $res = $this->db->get($this->tbl_po);
 

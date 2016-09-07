@@ -86,7 +86,7 @@
         function assignUsername ( username ) {
             $("input[id='_easyui_textbox_input8'], input[name='emp_username']")
                 .val( username )
-                .prop('disabled', true);
+                .prop('readonly', true);
             $("input[id='_easyui_textbox_input8']")
                 .removeClass('validatebox-invalid textbox-prompt');
             $("input[name='emp_username']")

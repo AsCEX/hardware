@@ -78,6 +78,8 @@
 <script type="text/javascript" src="<?php echo site_url('app/login.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/router.js') ?>"></script>
 
+
+<script type="text/javascript" src="<?php echo site_url('app/print.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/suppliers.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/deliveries.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/purchase_orders.js') ?>"></script>

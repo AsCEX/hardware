@@ -43,9 +43,7 @@ var coils = {
             [
               {field:'coil_id',title:'ID',width:'10%'},
               {field:'coil_code',title:'Coil Code',width:'15%'},
-              {field:'coil_length',title:'Length',width:'10%'},
-              {field:'coil_height',title:'Height',width:'10%'},
-              {field:'coil_width',title:'Width',width:'10%'},
+              {field:'coil_weight',title:'Weight',width:'10%',align:'right'},
               {field:'clr_name',title:'Color',width:'20%',
                 formatter: function(value,row,index){
                   return "<i class='fa fa-square' style='color: " + row.clr_hex + ";'></i> " + row.clr_name.replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
@@ -86,9 +84,7 @@ var coils = {
             [
               {field:'coil_id',title:'ID',width:'10%'},
               {field:'coil_code',title:'Coil Code',width:'15%',align:'right'},
-              {field:'coil_length',title:'Length',width:'10%',align:'right'},
-              {field:'coil_height',title:'Height',width:'10%',align:'right'},
-              {field:'coil_width',title:'Width',width:'10%',align:'right'},
+              {field:'coil_weight',title:'Weight',width:'10%',align:'right'},
               {field:'clr_name',title:'Color',width:'15%',
                 formatter: function(value,row,index){
                   return "<i class='fa fa-square' style='color: " + row.clr_hex + ";'></i> " + row.clr_name.replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});

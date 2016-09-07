@@ -1,6 +1,6 @@
 
 var po = {
-
+    print_url: "WALA",
     init: function() {
         this.datagrid();
         this.dialog();
@@ -78,6 +78,23 @@ var po = {
                 }
             }]
         });
+
+        $("#dlg-print-po").dialog({
+            resizable: true,
+            modal: true,
+            closed: true,
+            buttons:[{
+                text:'Save',
+                handler:function(){
+                    print.start(po.print_url);
+                }
+            },{
+                text:'Close',
+                handler:function(){
+                    $("#dlg-print-po").dialog('close');
+                }
+            }]
+        });
     },
 
     create: function(){
@@ -140,9 +157,12 @@ var po = {
     view: function() {
         var row = $('#dg-po').datagrid('getSelected');
         if ( row ) {
-            var url = site_url + 'purchase_orders/print/' + row.po_id;
-            window.open(url, "_blank");
+            /*var url = site_url + 'purchase_orders/po_print/' + row.po_id;
+            window.open(url, "_blank");*/
+            var p_url = site_url + 'purchase_orders/po_print/' + row.po_id;
+            po.print_url = p_url ;
+            $('#dlg-print-po').dialog('open').dialog('refresh', p_url).dialog('center').dialog('setTitle','Print PO');
         }
-    }
+    },
 
 }

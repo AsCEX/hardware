@@ -73,10 +73,7 @@ class Purchase_orders extends MY_Controller {
         $this->load->view('purchase_orders/dialog/add', $data);
     }
 
-    /**
-     * @param $po_id
-     */
-    public function print( $po_id ) {
+    public function po_print( $po_id ) {
 
         $customer = $this->purchase_orders_model->getCustomerCompanyByPOId( $po_id );
 
@@ -86,6 +83,7 @@ class Purchase_orders extends MY_Controller {
         $sheets = $this->sheets_model->getItemsToPrintByPOId( $po_id );
 
         $data['cust_company'] =  $customer->cust_company;
+        $data['customer'] =  $customer;
         $data['po'] = ($po) ? $po : array();
         $data['sheets'] = ($sheets) ? $sheets : array();
 

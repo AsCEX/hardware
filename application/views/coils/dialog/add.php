@@ -10,31 +10,21 @@
                 <input name="coil_code" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_code) ? $coils->coil_code : ""; ?>">
             </div>
             <div class="fitem">
-                <label>Length:</label>
-                <input name="coil_length" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($coils->coil_length) ? $coils->coil_length : ""; ?>">
+                <label>Weight:</label>
+                <input name="coil_weight" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($coils->coil_weight) ? $coils->coil_weight : ""; ?>">
             </div>
-            <div class="fitem">
-                <label>Width:</label>
-                <input name="coil_width" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($coils->coil_width) ? $coils->coil_width : ""; ?>">
-            </div>
-            <div class="fitem">
-                <label>Height:</label>
-                <input name="coil_height" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($coils->coil_height) ? $coils->coil_height : ""; ?>">
-            </div>
+
             <div class="fitem">
                 <label>Color:</label>
-                <select name="coil_clr_id" editable="false">
-                  <option value="" disabled>Select Color</option>
-                  <?php if($colors) { ?>
-                    <?php foreach ($colors as $color) {
-                            $selected = ($color->clr_id === $coils->coil_clr_id)? "selected": "";
-                          ?>
-                          <option value="<?php echo $color->clr_id;?>" <?php echo $selected;?>>
-                            <?php echo $color->clr_name; ?>
-                          </option>
-                    <?php } ?>
-                  <?php } ?>
+                <select class="easyui-combobox" editable="false" name="coil_clr_id" style="width:160px"
+                        url="<?php echo site_url('colors/getColorsComboBox'); ?>/<?php echo isset($coils->coil_clr_id) ? $coils->coil_clr_id : ''; ?>"
+                        method="get"
+                        valueField="name"
+                        prompt="Select Color"
+                        textField="value"
+                        required="true">
                 </select>
+
             </div>
 
             <div class="fitem">
