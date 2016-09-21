@@ -36,6 +36,7 @@
                 <a href="/" class="easyui-linkbutton" data-options="plain:true">Home</a>
                 <a href="" class="easyui-menubutton" data-options="plain:true,menu:'#transactions'">Transactions</a>
                 <a href="" class="easyui-menubutton" data-options="plain:true,menu:'#setup'">Setup</a>
+                <a href="<?php echo site_url('auth/logout'); ?>" class="easyui-linkbutton" data-options="plain:true">Logout</a>
             </div>
             <div id="setup" style="width:250px;">
                 <div class="menu-links" data-url="<?php echo site_url('customers'); ?>" >Customers</div>
@@ -44,14 +45,16 @@
                 <div class="menu-sep"></div>
                 <div class="menu-links" data-url="<?php echo site_url('coils'); ?>" >Coils</div>
                 <div class="menu-links" data-url="<?php echo site_url('sheets'); ?>" >Sheets</div>
+                <div class="menu-sep"></div>
                 <div class="menu-links" data-url="<?php echo site_url('colors'); ?>" >Colors</div>
 
             </div>
             <div id="transactions" style="width:250px;">
                 <div class="menu-links" data-url="<?php echo site_url('deliveries'); ?>" >Deliveries</div>
                 <div class="menu-links" data-url="<?php echo site_url('purchase_orders'); ?>" >Purchased Orders</div>
-
-        </div>
+                <div class="menu-sep"></div>
+                <div class="menu-links" data-url="<?php echo site_url('productions'); ?>" >Production</div>
+            </div>
         </div>
 
         <div region="center">
@@ -83,6 +86,7 @@
 <script type="text/javascript" src="<?php echo site_url('app/suppliers.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/deliveries.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/purchase_orders.js') ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('app/productions.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/coils.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/sheets.js') ?>"></script>
 

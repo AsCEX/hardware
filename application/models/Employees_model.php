@@ -53,7 +53,7 @@ class Employees_model extends CI_Model
 
         if ( $emp_id ) {
 
-            $this->db->where("emp_id", $data['emp_id']);
+            $this->db->where("emp_id", $emp_id);
             $this->db->update($this->tbl_employees, $data);
 
             return $emp_id;

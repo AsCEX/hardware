@@ -4,11 +4,12 @@
 
     <div id="cc" class="easyui-layout" fit="true" style="height:450px;">
         <div data-options="region:'center',title:'Coil Info'" style="padding:5px;">
-            <input type="hidden" name="coil_dr_id" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_dr_id) ? $coils->coil_dr_id : $drd_id; ?>">
+            <input type="hidden" name="coil_dr_id" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_dr_id) ? $coils->coil_dr_id : $dr_id; ?>">
             <div class="fitem">
                 <label>Coil Code:</label>
                 <input name="coil_code" class="easyui-textbox" required="true" align="right" value="<?php echo isset($coils->coil_code) ? $coils->coil_code : ""; ?>">
             </div>
+            <hr />
             <div class="fitem">
                 <label>Weight:</label>
                 <input name="coil_weight" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($coils->coil_weight) ? $coils->coil_weight : ""; ?>">
@@ -27,14 +28,23 @@
 
             </div>
 
+            <hr />
             <div class="fitem">
                 <label>Qty:</label>
-                <input name="coil_qty" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($coils->coil_qty) ? $coils->coil_qty : ""; ?>">
+                <?php $qty =  isset($coils->coil_qty) ? $coils->coil_qty: 1; ?>
+                <input id="coil_qty" name="coil_qty" class="easyui-numberbox" precision="2"  min="1" required="true" align="right" value="<?php echo $qty; ?>">
             </div>
 
             <div class="fitem">
-                <label>Price:</label>
-                <input name="coil_price" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($coils->coil_price) ? $coils->coil_price : ""; ?>">
+                <label>Unit Price:</label>
+                <?php $price =  isset($coils->coil_price) ? $coils->coil_price : 0; ?>
+                <input id="coil_price" name="coil_price" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo $price; ?>">
+            </div>
+
+            <hr />
+            <div class="fitem">
+                <label>Total Price:</label>
+                <input id="tot_price" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo ($qty * $price); ?>">
             </div>
             <!--div class="fitem">
                 <label>Date Created:</label>
@@ -44,6 +54,29 @@
     </div>
 
 </form>
+
+<script>
+
+    function totPrice(){
+        var qty = $("#coil_qty").numberbox('getValue');
+        var price = $("#coil_price").numberbox('getValue');
+
+        $("#tot_price").numberbox('setValue', qty * price);
+    }
+
+    $(function(){
+
+        $("#coil_price, #coil_qty").numberbox({
+            onChange: function(n, o){
+                totPrice();
+            }
+        });
+
+    });
+
+</script>
+
+
 <style>
     #fm-coils .fitem label { width: 150px; }
 </style>

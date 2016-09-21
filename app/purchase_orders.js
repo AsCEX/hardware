@@ -23,7 +23,8 @@ var po = {
                         text: 'Edit Order',
                         iconCls: 'icon-edit',
                         handler: function() {
-                            po.update();
+                            var row = $('#dg-po').datagrid('getSelected');
+                            po.update(row.po_id);
                         }
                     },
                     '-',
@@ -44,7 +45,7 @@ var po = {
                     }
                 ],
                 pagination:true,
-                pageSize:10,
+                pageSize:50,
                 rownumbers:true,
                 fitColumns:"true",
                 singleSelect:"true",
@@ -54,14 +55,60 @@ var po = {
                         {field:'cust_company',title:'Company',width:'10%'},
                         {field:'fullname',title:'Owner',width:'10%'},
                         {field:'po_date',title:'Purchase Order Date',width:'20%'},
+                        {field:'po_fulfillment',title:'Status',width:'20%',align:'right',
+                            formatter: function(value,row,index){
+                                return (parseInt(row.po_fulfillment)) ?
+                                    (parseInt(row.po_fulfillment)==2 ?
+                                        '<span style="font-weight:bold;color:green;">Processing</span>' : '<span style="font-weight:bold;">Completed</span>')
+                                    : '<span style="font-weight:bold;color:red;">Pending</span>';
+                            }
+                        },
                     ]
-                ]
+                ],
+                onDblClickRow: function(index, field, value){
+                    po.update(field.po_id);
+                }
             }).datagrid('clientPaging');
         })
     },
 
     dialog: function() {
         var po = this;
+        $("#dlg-po-complete").dialog({
+            resizable: true,
+            modal: true,
+            closed: true,
+            buttons:[
+                {
+                    text: 'Complete',
+                    iconCls: 'icon-save',
+                    handler: function(){
+
+                        $.messager.confirm('Confirm', 'Complete Order?', function(r) {
+                            if ( r ) {
+                                $('#fm-po-complete').form('submit',{
+                                    url: site_url + 'purchase_orders/completePO',
+                                    onSubmit: function(){
+                                        return $(this).form('validate');
+                                    },
+                                    success: function(response){
+                                        po.completeSave();
+                                    }
+                                });
+                            }
+                        })
+                    }
+                },{
+                    text:'Cancel',
+                    handler:function(){
+                        $("#po_fulfillment").combobox('select', 0);
+                        $("#dlg-po-complete").dialog('close');
+                    }
+                }],
+            onClose: function(){
+                $("#po_fulfillment").combobox('select', 0);
+            }
+        });
         $("#dlg-po").dialog({
             resizable: true,
             modal: true,
@@ -97,12 +144,26 @@ var po = {
         });
     },
 
+    complete: function(po_id){
+        $('#dlg-po-complete').dialog('open').dialog('refresh', site_url + 'purchase_orders/dialogComplete/'+po_id).dialog('center').dialog('setTitle','Update Coil Weight');
+    },
+
     create: function(){
         $('#dlg-po').dialog('open').dialog('refresh', site_url + 'purchase_orders/dialog').dialog('center').dialog('setTitle','New');
         $('#fm-po').form('clear');
     },
 
     save: function() {
+
+        var poIf = $("#po_fulfillment").combobox('getValue');
+        if(poIf == 1){
+            po.complete(poIf);
+        }else{
+            po.completeSave();
+        }
+
+    },
+    completeSave: function(){
 
         var sheets = $("#dg-sheets").datagrid('getRows');
         var sheet_ids = [];
@@ -119,6 +180,7 @@ var po = {
             },
             success: function(response){
                 $.messager.alert('Message','Successful', 'info', function(){
+                    $('#dlg-po-complete').dialog('close');
                     $('#dlg-po').dialog('close');
                     $('#dg-po').datagrid('reload');
                 });
@@ -126,13 +188,12 @@ var po = {
         });
     },
 
-    update: function(){
+    update: function(rowId){
 
-        var row = $('#dg-po').datagrid('getSelected');
-        console.log(row);
-        if (row){
-            $('#dlg-po').dialog('open').dialog('refresh', site_url + 'purchase_orders/dialog/' + row.po_id).dialog('center').dialog('setTitle','Edit');
-            $('#fm-po').form('load',row);
+        //var row = $('#dg-po').datagrid('getSelected');
+        if (rowId){
+            $('#dlg-po').dialog('open').dialog('refresh', site_url + 'purchase_orders/dialog/' + rowId).dialog('center').dialog('setTitle','Edit');
+            //$('#fm-po').form('load',row);
         }
     },
 

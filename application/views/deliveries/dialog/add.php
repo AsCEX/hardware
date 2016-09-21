@@ -5,7 +5,7 @@
             <div data-options="region:'south',title:'Delivery Details',split:true" style="height:320px;">
                 <!--<table id="drd-grid" title="" class="easyui-datagrid" fit="true"></table>-->
                 <?php $dr_id =  isset($delivery->dr_id) ? $delivery->dr_id : 0; ?>
-                <div id="drd-content" class="easyui-panel" title="" fit="true" border="false" style="" href="<?php echo site_url('coils?dr_id=' . $dr_id); ?>"></div>
+                <div id="drd-content-deliveries" class="easyui-panel" title="" fit="true" border="false" style="" href="<?php echo site_url('coils?dr_id=' . $dr_id); ?>"></div>
             </div>
 
             <div data-options="region:'center',title:'Deliveries'" style="padding:5px;">

@@ -20,14 +20,19 @@ class Coils_model extends CI_Model {
         $this->db->join($this->tbl_user_info, "coil_created_by = ui_id", "left");
         $this->db->join($this->tbl_deliveries, "coil_dr_id = dr_id", "left");
         $this->db->join($this->tbl_suppliers, "dr_supp_id = supp_id", "left");
-        if($dr_id == -1){
-            $this->db->where('coil_dr_id !=', 0);
+        if(is_array($dr_id)){
+            $this->db->where_in('coil_id', $dr_id);
         }else{
-            $this->db->where('coil_dr_id', $dr_id);
+            if($dr_id == -1){
+                $this->db->where('coil_dr_id !=', 0);
+            }else{
+                $this->db->where('coil_dr_id', $dr_id);
+            }
         }
         $this->db->order_by("coil_dr_id", "desc");
         $this->db->order_by("coil_created_date", "asc");
         $rs = $this->db->get($this->tbl_coils);
+//        echo $this->db->last_query();
         return $rs->result();
     }
 

@@ -1,5 +1,6 @@
 var coils = {
   dr_id: 0,
+  po_id: 0,
   init: function() {
     this.datagrid();
     this.dialog();
@@ -10,10 +11,9 @@ var coils = {
 
     that = this;
 
-    using('plugins/jquery.client.paging.js', function() {
 
       $('#dg-coils').datagrid({
-        url: site_url + "coils/getCoilsGrid/" + that.dr_id ,
+        url: site_url + "coils/getCoilsGrid/" + that.dr_id + '/' + that.po_id,
 
         pagination:true,
         pageSize:10,
@@ -48,7 +48,7 @@ var coils = {
                 formatter: function(value,row,index){
                   return "<i class='fa fa-square' style='color: " + row.clr_hex + ";'></i> " + row.clr_name.replace(/(^|\s)[a-z]/g,function(f){return f.toUpperCase();});
                 }},
-              {field:'supp_company',title:'Company',width:'20%'},
+              /*{field:'supp_company',title:'Company',width:'20%'},*/
             ]
           ]
         });
@@ -99,7 +99,6 @@ var coils = {
 
 
 
-    })
   },
 
   dialog: function() {

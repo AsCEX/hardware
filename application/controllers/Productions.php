@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Purchase_orders extends MY_Controller {
+class Productions extends MY_Controller {
 
     public function __construct(){
         parent::__construct();
@@ -12,15 +12,21 @@ class Purchase_orders extends MY_Controller {
 
     public function index()
     {
-        $this->load->view('purchase_orders/default');
+        $this->load->view('productions/default');
     }
 
-    public function getPOGrid() {
+    public function getProductionsGrid() {
 
-        $employees = $this->purchase_orders_model->getPOGrid();
+        $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+        $rows = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
+        $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'po_fulfillment,po_id';
+        $order = isset($_POST['order']) ? strval($_POST['order']) : 'desc';
+        $offset = ($page-1)*$rows;
 
-        $resultSet['rows'] = $employees;
-        $resultSet['total'] = count($employees);
+        $productions = $this->purchase_orders_model->getProductions($page, $rows, $sort, $order);
+
+        $resultSet['rows'] = $productions;
+        $resultSet['total'] = $this->purchase_orders_model->getProductionsCount();
 
         $this->output
             ->set_content_type('application/json')
@@ -51,29 +57,6 @@ class Purchase_orders extends MY_Controller {
         }
     }
 
-    public function completePO(){
-        $old_coils = $_POST['coil_old_weight'];
-        $po_id = $_POST['po_id'];
-        $coils = $_POST['coil_weight'];
-
-        foreach($coils as $key => $coil){
-            $c = $this->purchase_orders_model->updateCoilWeight(array('coil_weight' => $coil), $key);
-            if($c){
-                $data = array(
-                    'cd_po_id' => $po_id,
-                    'cd_coil_id'    => $key,
-                    'cd_initial_weight'    => $old_coils[$key],
-                    'cd_current_weight' => $coil,
-                    'cd_created_date'   => date('Y-m-d'),
-                    'cd_created_by' => $this->session->userdata('ui_id')
-                );
-
-                $this->purchase_orders_model->saveCoilHistory($data);
-            }
-        }
-
-    }
-
     public function deletePO() {
 
         $delPO = $this->purchase_orders_model->delete( $_POST );
@@ -93,16 +76,7 @@ class Purchase_orders extends MY_Controller {
         }
         $data['customers'] =  $this->customers_model->getCustomersGrid();
         $data['po'] = ($po) ? $po : array();
-        $this->load->view('purchase_orders/dialog/add', $data);
-    }
-
-    public function dialogComplete( $po_id = 0 ){
-        $coils = $this->purchase_orders_model->getPOCoils( $po_id );
-
-        $data['po_id'] = $po_id;
-        $data['dr_id'] = 0; //update the dr_id of coils.js
-        $data['coils'] = ($coils) ? $coils : array();
-        $this->load->view('purchase_orders/dialog/completed', $data);
+        $this->load->view('productions/dialog/add', $data);
     }
 
     public function po_print( $po_id ) {
@@ -119,6 +93,6 @@ class Purchase_orders extends MY_Controller {
         $data['po'] = ($po) ? $po : array();
         $data['sheets'] = ($sheets) ? $sheets : array();
 
-        $this->load->view('purchase_orders/print/index', $data);
+        $this->load->view('productions/print/index', $data);
     }
 }

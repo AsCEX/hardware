@@ -10,6 +10,7 @@ class Sheets extends MY_Controller {
 
     public function index() {
         $po_id = isset($_GET['po_id']) ? $_GET['po_id'] : -1;
+        $data['prod'] = isset($_GET['prod']) ? $_GET['prod'] : 0;
         $data['po_id'] = $po_id;
         $this->load->view('sheets/default', $data);
     }

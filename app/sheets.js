@@ -1,6 +1,7 @@
 
 var sheets = {
     po_id: 0,
+    prod: 0,
     init: function() {
         this.datagrid();
         this.dialog();
@@ -30,7 +31,7 @@ var sheets = {
                     columns:[
                         [
                             {field:'sht_code',title:'Code',width:'10%'},
-                            {field:'coil_code',title:'Coil',width:'10%'},
+                            {field:'coil_code',title:'Coil',width:'30%'},
                             {field:'clr_name',title:'Color',width:'10%'},
                             {field:'sht_length',title:'Length',width:'10%'},
                             {field:'sht_height',title:'Height',width:'10%'},
@@ -44,37 +45,11 @@ var sheets = {
             }else{
 
                 $('#dg-sheets').datagrid({
-                    toolbar: [
-                        {
-                            text: 'Add Sheet',
-                            iconCls: 'icon-add',
-                            handler: function() {
-                                sheets.create();
-                            }
-                        },
-                        '-',
-                        {
-                            text: 'Edit Sheet',
-                            iconCls: 'icon-edit',
-                            handler: function() {
-                                sheets.update();
-                            }
-                        },
-                        '-',
-                        {
-                            text: 'Delete Sheet',
-                            iconCls: 'icon-remove',
-                            handler: function() {
-                                sheets.delete();
-                            }
-                        },
-                    ],
-
                     columns:[
                         [
                             {field:'sht_code',title:'Code',width:'10%'},
-                            {field:'coil_code',title:'Coil',width:'10%'},
-                            {field:'clr_name',title:'Color',width:'10%'},
+                            {field:'coil_code',title:'Coil',width:'40%'},
+                            /*{field:'clr_name',title:'Color',width:'10%'},*/
                             {field:'sht_length',title:'Length',width:'10%'},
                             {field:'sht_height',title:'Height',width:'10%'},
                             {field:'sht_width',title:'Width',width:'10%'},
@@ -83,6 +58,37 @@ var sheets = {
                         ]
                     ],
                 });
+
+                if(!sheets.prod){
+                    $("#dg-sheets").datagrid({
+                        toolbar: [
+                            {
+                                text: 'Add Sheet',
+                                iconCls: 'icon-add',
+                                handler: function() {
+                                    sheets.create();
+                                }
+                            },
+                            '-',
+                            {
+                                text: 'Edit Sheet',
+                                iconCls: 'icon-edit',
+                                handler: function() {
+                                    sheets.update();
+                                }
+                            },
+                            '-',
+                            {
+                                text: 'Delete Sheet',
+                                iconCls: 'icon-remove',
+                                handler: function() {
+                                    sheets.delete();
+                                }
+                            },
+                        ],
+
+                    });
+                }
 
             }
 

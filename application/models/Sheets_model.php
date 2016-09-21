@@ -18,12 +18,16 @@ class Sheets_model extends CI_Model
             coil_id,
             coil_code,
             sht_id,
+            sht_po_id,
             sht_coil_id,
             sht_code,
             sht_length,
             sht_height,
             sht_width,
-            sht_clr_id
+            sht_clr_id,
+            sht_qty,
+            sht_price,
+            clr_name
         ");
 
         $this->db->where("sht_id", $sht_id);

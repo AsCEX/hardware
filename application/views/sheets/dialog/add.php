@@ -48,19 +48,50 @@
 
             <hr />
 
-
             <div class="fitem">
                 <label>Qty:</label>
-                <input name="sht_qty" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($sheet->sht_qty) ? $sheet->sht_qty : ""; ?>">
+                <?php $qty =  isset($sheet->sht_qty) ? $sheet->sht_qty: 1; ?>
+                <input id="sht_qty" name="sht_qty" class="easyui-numberbox" precision="2" required="true" align="right" min="1" value="<?php echo $qty; ?>">
             </div>
 
             <div class="fitem">
                 <label>Price:</label>
-                <input name="sht_price" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo isset($sheet->sht_price) ? $sheet->sht_price : ""; ?>">
+                <?php $price =  isset($sheet->sht_price) ? $sheet->sht_price : 0; ?>
+                <input id="sht_price" name="sht_price" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo $price; ?>">
             </div>
+
+            <hr />
+            <div class="fitem">
+                <label>Total Price:</label>
+                <input id="tot_price" class="easyui-numberbox" precision="2" required="true" align="right" value="<?php echo ($qty * $price); ?>">
+            </div>
+
+
         </div>
 
 </form>
+
+<script>
+
+    function totPrice(){
+        var qty = $("#sht_qty").numberbox('getValue');
+        var price = $("#sht_price").numberbox('getValue');
+
+        $("#tot_price").numberbox('setValue', qty * price);
+    }
+
+    $(function(){
+
+        $("#sht_price, #sht_qty").numberbox({
+            onChange: function(n, o){
+                totPrice();
+            }
+        });
+
+    });
+
+</script>
+
 <style>
     #fm-sheets .fitem label { width: 100px; }
 </style>
