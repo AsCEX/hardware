@@ -2,14 +2,16 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Inventory Management System</title>
+	<title>San Josue Realty and Development Corp.</title>
 
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/bootstrap.scaffolding.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/bootstrap.forms.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/font-awesome.min.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/bootstrap/easyui.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/metro/easyui.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/color.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/icon.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/main.css') ?>">
-    <style>body{ visibility: hidden; }</style>
+
     <script type="text/javascript">
         var site_url = "<?php echo site_url(); ?>";
     </script>
@@ -27,7 +29,7 @@
 </div>
 
 
-<div data-options="region:'center',title:'Bakal Para Sa Pagbabago'">
+<div data-options="region:'center',title:'San Josue Realty and Development Corp.'" id="wrapper">
 
     <div class="easyui-layout" fit="true" style="height:250px;">
         <div region="north" style="height:32px;">
@@ -35,6 +37,7 @@
             <div id="mm" style="padding:2px 5px;">
                 <a href="/" class="easyui-linkbutton" data-options="plain:true">Home</a>
                 <a href="" class="easyui-menubutton" data-options="plain:true,menu:'#transactions'">Transactions</a>
+                <a href="" class="easyui-menubutton" data-options="plain:true,menu:'#inventory'">Inventory</a>
                 <a href="" class="easyui-menubutton" data-options="plain:true,menu:'#setup'">Setup</a>
                 <a href="<?php echo site_url('auth/logout'); ?>" class="easyui-linkbutton" data-options="plain:true">Logout</a>
             </div>
@@ -43,22 +46,25 @@
                 <div class="menu-links" data-url="<?php echo site_url('employees'); ?>" >Employees</div>
                 <div class="menu-links" data-url="<?php echo site_url('suppliers'); ?>" >Suppliers</div>
                 <div class="menu-sep"></div>
-                <div class="menu-links" data-url="<?php echo site_url('coils'); ?>" >Coils</div>
-                <div class="menu-links" data-url="<?php echo site_url('sheets'); ?>" >Sheets</div>
-                <div class="menu-sep"></div>
                 <div class="menu-links" data-url="<?php echo site_url('colors'); ?>" >Colors</div>
 
             </div>
             <div id="transactions" style="width:250px;">
-                <div class="menu-links" data-url="<?php echo site_url('deliveries'); ?>" >Deliveries</div>
-                <div class="menu-links" data-url="<?php echo site_url('purchase_orders'); ?>" >Purchased Orders</div>
+                <div class="menu-links" data-url="<?php echo site_url('contracts'); ?>" >Sales Contract</div>
+                <div class="menu-links" data-url="<?php echo site_url('job_orders'); ?>" >Job Orders</div>
+                <div class="menu-links" data-url="<?php echo site_url('job_orders'); ?>" >Ammendments</div>
+                <div class="menu-links" data-url="" >Deliveries</div>
+            </div>
+            <div id="inventory" style="width:250px;">
+                <div class="menu-links" data-url="<?php echo site_url('materials'); ?>" data-options="iconCls:'fa fa-home'" >Materials</div>
                 <div class="menu-sep"></div>
-                <div class="menu-links" data-url="<?php echo site_url('productions'); ?>" >Production</div>
+                <div class="menu-links" data-url="<?php echo site_url('contracts'); ?>" data-options="iconCls:'fa fa-home'" >Roofing &amp; Bended Panels</div>
+                <div class="menu-links" data-url="<?php echo site_url('deliveries'); ?>" data-options="iconCls:'fa fa-cogs '" >Hardware Accessories</div>
             </div>
         </div>
 
         <div region="center">
-            <div id="main-content" class="easyui-panel" title="" fit="true" border="false" style="" ></div>
+            <div id="main-content" class="easyui-panel" title="" fit="true" border="false" style="position:relative;overflow:hidden;" ></div>
         </div>
 
 
@@ -72,6 +78,8 @@
 <script type="text/javascript" src="<?php echo site_url('assets/js/plugins/jquery.maskedinput.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('assets/js/jquery.easyui.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('assets/js/jquery.edatagrid.js') ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('assets/js/plugins/datagrid-groupview.js') ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('assets/js/plugins/datagrid-detailview.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('assets/js/easyloader.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('assets/js/plugins/accounting.min.js') ?>"></script>
 
@@ -84,11 +92,6 @@
 
 <script type="text/javascript" src="<?php echo site_url('app/print.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/suppliers.js') ?>"></script>
-<script type="text/javascript" src="<?php echo site_url('app/deliveries.js') ?>"></script>
-<script type="text/javascript" src="<?php echo site_url('app/purchase_orders.js') ?>"></script>
-<script type="text/javascript" src="<?php echo site_url('app/productions.js') ?>"></script>
-<script type="text/javascript" src="<?php echo site_url('app/coils.js') ?>"></script>
-<script type="text/javascript" src="<?php echo site_url('app/sheets.js') ?>"></script>
 
 
 <script type="text/javascript">

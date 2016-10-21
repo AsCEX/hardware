@@ -27,7 +27,7 @@
 </div>
 
 
-<div data-options="region:'center',title:'Bakal Para Sa Pagbabago'">
+<div data-options="region:'center',title:'<img src="" />' ">
 
     <div class="easyui-layout" fit="true" style="height:250px;">
         <div region="north" style="height:32px;">
