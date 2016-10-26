@@ -13,6 +13,21 @@ class Contracts extends MY_Controller {
         $this->load->view('contracts/index');
     }
 
+    public function contractDetails($contract_id = null){
+        $data['contract_id'] = $contract_id;
+        $contracts = $this->contracts_model->getContracts($contract_id);
+        $data['contract_details'] = reset($contracts);
+        $this->load->view('contracts/contract_details', $data);
+    }
+
+    public function addMaterialView(){
+        $this->load->view('contracts/add_material');
+    }
+
+    public function addChargesView(){
+        $this->load->view('contracts/add_charges');
+    }
+
     public function getContracts(){
         $contracts = $this->contracts_model->getContracts();
 
@@ -23,14 +38,6 @@ class Contracts extends MY_Controller {
             ->set_content_type('application/json')
             ->set_output(json_encode($resultSet) );
     }
-
-    public function contractDetails($contract_id = null){
-        $data['contract_id'] = $contract_id;
-        $contracts = $this->contracts_model->getContracts($contract_id);
-        $data['contract_details'] = reset($contracts);
-        $this->load->view('contracts/contract_details', $data);
-    }
-
 
     public function getContractDetails($contract_id = null){
         $order_details = $this->contracts_model->getContractDetails($contract_id);

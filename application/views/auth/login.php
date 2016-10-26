@@ -2,11 +2,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Inventory Management System</title>
+    <title>San Josue Realty and Development Corp.</title>
 
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/bootstrap.scaffolding.min.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/bootstrap.forms.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/font-awesome.min.css') ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/bootstrap/easyui.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/metro/easyui.css') ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/color.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/icon.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/main.css') ?>">
     <style>body{ visibility: hidden; }</style>
@@ -27,7 +29,7 @@
 </div>
 
 
-<div data-options="region:'center',title:'<img src="" />' ">
+<div data-options="region:'center',title:'San Josue Realty and Development Corp.'" >
 
     <div class="easyui-layout" fit="true" style="height:250px;">
         <div region="north" style="height:32px;">
@@ -50,7 +52,7 @@
                          closable="false"
                          modal="true"
                          title="System Login"
-                         buttons="#dlg-buttons">
+                         buttons="#dlg-buttons" cls="c6">
                         <form id="fm-login" method="post">
                             <div class="fitem">
                                 <label style="width:300px;">Username:</label>
@@ -67,7 +69,7 @@
                     </div>
 
                     <div id="dlg-buttons">
-                        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="pim_login.login()" style="width:90px">Login</a>
+                        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="pim_login.login()" style="width:90px">Login</a>
                     </div>
                 </div>
             </div>

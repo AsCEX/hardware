@@ -26,7 +26,7 @@ var job_order_details = {
                 if(row.cat_id == 1){
                     var ddv = $(this).datagrid('getRowDetail',index).find('table.ddv');
                     ddv.datagrid({
-                        url:site_url + 'datagrid_data1.json',
+                    url:site_url + 'datagrid_data1.json',
                         fitColumns:false,
                         singleSelect:true,
                         rownumbers:true,

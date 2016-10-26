@@ -6,6 +6,7 @@ var contract_details = {
     init: function(contract_id) {
         this.contract_id = contract_id;
         this.datagrid();
+        this.dialog();
     },
 
     datagrid: function() {
@@ -17,7 +18,17 @@ var contract_details = {
             rownumbers:true,
             fitColumns: true,
             showFooter: true,
-            singleSelect: true,
+            singleSelect: false,
+            ctrlSelect: true,
+            toolbar: [
+                {
+                    text: 'Add Material',
+                    iconCls: 'fa fa-plus',
+                    handler: function(){
+                        $('#material-form-dialog').dialog('open').dialog('refresh', site_url + 'contracts/addMaterialView').dialog('setTitle', 'Add Material');
+                    }
+                },
+            ],
             view: groupview,
             groupField:'cat_name',
             groupFormatter:function(value,rows){
@@ -98,6 +109,15 @@ var contract_details = {
             fitColumns: true,
             showFooter: true,
             view: groupview,
+            toolbar: [
+                {
+                    text: 'Add Charges',
+                    iconCls: 'fa fa-plus',
+                    handler: function(){
+                        $('#charges-form-dialog').dialog('open').dialog('refresh', site_url + 'contracts/addChargesView').dialog('setTitle', 'Add Charges');
+                    }
+                },
+            ],
             groupField:'chrg_type_name',
             groupFormatter:function(value,rows){
                 return value;
@@ -115,6 +135,45 @@ var contract_details = {
         });
 
     },
+
+    dialog: function(){
+
+        $("#material-form-dialog").dialog({
+            resizable: true,
+            modal: true,
+            closed: true,
+            cls: 'c6',
+            buttons:[{
+                text:'Save',
+                handler:function(){
+
+                }
+            },{
+                text:'Close',
+                handler:function(){
+                    $("#material-form-dialog").dialog('close');
+                }
+            }]
+        });
+
+        $("#charges-form-dialog").dialog({
+            resizable: true,
+            modal: true,
+            closed: true,
+            cls: 'c6',
+            buttons:[{
+                text:'Save',
+                handler:function(){
+
+                }
+            },{
+                text:'Close',
+                handler:function(){
+                    $("#charges-form-dialog").dialog('close');
+                }
+            }]
+        });
+    }
 
 
 }

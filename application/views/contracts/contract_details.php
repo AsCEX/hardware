@@ -5,8 +5,17 @@
 
     <div region="north" title="Contract Details" style="height:200px;" collapsible="false">
         <div class="row" style="padding:10px;margin:0px;">
-            <?php #pre_print($contract_details); ?>
-            <div class="col-md-3">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Sales Contract ID</label>
+                    <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_id; ?>" disabled="disable">
+                </div>
+                <div class="form-group">
+                    <label >Status</label>
+                    <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_status; ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="form-group">
                     <label >Company</label>
                     <input type="text" class="form-control input-sm" value="<?php echo $contract_details->cust_company; ?>">
@@ -16,7 +25,7 @@
                     <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_date; ?>">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label >Project</label>
                     <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_project; ?>">
@@ -26,7 +35,7 @@
                     <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_location; ?>">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label >Sales Rep</label>
                     <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_sales_rep; ?>">
@@ -36,14 +45,20 @@
                     <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_reference; ?>">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="form-group">
                     <label>Color</label>
                     <input type="text" class="form-control input-sm" value="">
                 </div>
                 <div class="form-group">
-                    <label >Status</label>
-                    <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_status; ?>">
+                    <label >Delivery Instructions</label>
+                    <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_delivery_instruction; ?>">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Terms of Payment</label>
+                    <textarea class="form-control input-sm" rows="5"><?php echo $contract_details->c_terms_of_payment; ?></textarea>
                 </div>
             </div>
         </div>
@@ -63,6 +78,9 @@
 <div id="breakdown-menu" class="easyui-menu">
     <div class="menu-links" onclick="" >View Break Down</div>
 </div>
+
+<div id="material-form-dialog" style="height: 450px;width: 350px;"></div>
+<div id="charges-form-dialog" style="height: 250px;width: 350px;"></div>
 
 <script>
     contract_details.init(<?php echo $contract_id; ?>);
