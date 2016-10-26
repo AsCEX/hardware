@@ -21,7 +21,7 @@ var contracts = {
                 [
                     {field:'c_id',title:'ID',width:'5%'},
                     {field:'cust_company',title:'Company',width:'15%'},
-                    {field:'c_date',title:'Date',width:'5%'},
+                    {field:'c_date',title:'Date',width:'6%'},
                     {field:'c_project',title:'Project',width:'20%'},
                     {field:'c_location',title:'Location',width:'20%'},
                     {field:'mat_cost',title:'Material Costs',width:'10%',align:'right',

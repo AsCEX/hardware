@@ -68,8 +68,8 @@ class Colors extends MY_Controller {
         foreach ($colors as $color) {
 
             $temp = array(
-                'name' => $color->clr_id,
-                'value' => $color->clr_name
+                'id' => $color->clr_id,
+                'text' => $color->clr_name
             );
 
             if ($color->clr_id == $clr_id) {

@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/bootstrap.scaffolding.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/bootstrap.forms.min.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/font-awesome.min.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/metro/easyui.css') ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/bootstrap/easyui.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/color.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/themes/icon.css') ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('assets/css/main.css') ?>">
@@ -58,8 +58,8 @@
             <div id="inventory" style="width:250px;">
                 <div class="menu-links" data-url="<?php echo site_url('materials'); ?>" data-options="iconCls:'fa fa-home'" >Materials</div>
                 <div class="menu-sep"></div>
-                <div class="menu-links" data-url="<?php echo site_url('contracts'); ?>" data-options="iconCls:'fa fa-home'" >Roofing &amp; Bended Panels</div>
-                <div class="menu-links" data-url="<?php echo site_url('deliveries'); ?>" data-options="iconCls:'fa fa-cogs '" >Hardware Accessories</div>
+                <div class="menu-links" data-url="" data-options="iconCls:'fa fa-home'" >Roofing &amp; Bended Panels</div>
+                <div class="menu-links" data-url="" data-options="iconCls:'fa fa-cogs '" >Hardware Accessories</div>
             </div>
         </div>
 
@@ -88,6 +88,7 @@
 <script type="text/javascript" src="<?php echo site_url('app/clock.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/login.js') ?>"></script>
 <script type="text/javascript" src="<?php echo site_url('app/router.js') ?>"></script>
+<script type="text/javascript" src="<?php echo site_url('app/functions.js') ?>"></script>
 
 
 <script type="text/javascript" src="<?php echo site_url('app/print.js') ?>"></script>

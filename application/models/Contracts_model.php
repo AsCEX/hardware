@@ -20,6 +20,7 @@ class Contracts_model extends CI_Model {
                   c_terms_of_payment,
                   c_delivery_instruction,
                   c_status,
+                  c_clr_id,
                   cust_company,
                   cust_address,
                   cust_owner,

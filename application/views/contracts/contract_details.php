@@ -5,14 +5,23 @@
 
     <div region="north" title="Contract Details" style="height:200px;" collapsible="false">
         <div class="row" style="padding:10px;margin:0px;">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="form-group">
-                    <label>Sales Contract ID</label>
+                    <label>SC</label>
                     <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_id; ?>" disabled="disable">
                 </div>
                 <div class="form-group">
                     <label >Status</label>
-                    <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_status; ?>">
+                    <input class="easyui-combobox" style="width:100px;"
+                           data-options="
+                            valueField: 'label',
+                            textField: 'value',
+                            data: [{id: '0',text: 'Pending'},{id: '1',text: 'Completed'}]"
+                           editable="false"
+                           valueField="id"
+                           textField="text"
+                           value="<?php echo $contract_details->c_status; ?>"
+                        />
                 </div>
             </div>
             <div class="col-md-2">
@@ -48,14 +57,20 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label>Color</label>
-                    <input type="text" class="form-control input-sm" value="">
+                    <input type="text" class="easyui-combobox input-sm"
+                           url="<?php echo site_url('colors/getColorsComboBox'); ?>"
+                           method="get"
+                           valueField="id"
+                           textField="text"
+                           editable="false"
+                           value="<?php echo $contract_details->c_clr_id; ?>" />
                 </div>
                 <div class="form-group">
                     <label >Delivery Instructions</label>
                     <input type="text" class="form-control input-sm" value="<?php echo $contract_details->c_delivery_instruction; ?>">
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label>Terms of Payment</label>
                     <textarea class="form-control input-sm" rows="5"><?php echo $contract_details->c_terms_of_payment; ?></textarea>
