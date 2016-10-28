@@ -6,9 +6,9 @@
 <div id="contracts-menu" class="easyui-menu">
     <div class="menu-links" onclick="contracts.order_details()" >Order Details</div>
     <div class="menu-links" data-url="" >Create Job Order</div>
-    <div class="menu-links" data-url="" >Purchased Orders</div>
+    <div class="menu-links" data-url="" >Ammendments Orders</div>
     <div class="menu-sep"></div>
-    <div class="menu-links" data-url="<?php echo site_url('productions'); ?>" >Production</div>
+    <div class="menu-links" data-url="contracts.order_details()" data-options="iconCls:'fa fa-plus'" >Add New Contract</div>
 </div>
 
 <script>

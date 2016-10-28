@@ -120,3 +120,7 @@ body > .layout-panel-center > .panel-header > .panel-title{
 }
 
 .menu.menu-top{ overflow:hidden!important;}
+
+.green{
+    color: green;
+}

@@ -33,6 +33,26 @@ class Job_Orders extends MY_Controller {
         $this->load->view('job_orders/job_order_details', $data);
     }
 
+    public function getAvailableContractCombobox(){
+        $sc = $this->job_orders_model->getAvailableContract();
+
+        $sc_data = array();
+
+        foreach ($sc as $s) {
+
+            $temp = array(
+                'id' => $s->c_id,
+                'text' => $s->c_id
+            );
+
+            $sc_data[] = $temp;
+        }
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($sc_data) );
+    }
+
 }
 
 ?>

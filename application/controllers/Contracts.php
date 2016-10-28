@@ -15,7 +15,7 @@ class Contracts extends MY_Controller {
 
     public function contractDetails($contract_id = null){
         $data['contract_id'] = $contract_id;
-        $contracts = $this->contracts_model->getContracts($contract_id);
+        $contracts = $this->contracts_model->getContractsById($contract_id);
         $data['contract_details'] = reset($contracts);
         $this->load->view('contracts/contract_details', $data);
     }

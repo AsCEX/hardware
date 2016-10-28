@@ -1,9 +1,10 @@
 
 var job_order_details = {
-
+    jo_id: 0,
     contract_id: 0,
 
-    init: function(contract_id) {
+    init: function(jo_id, contract_id) {
+        this.jo_id = jo_id;
         this.contract_id = contract_id;
         this.datagrid();
     },
@@ -26,10 +27,18 @@ var job_order_details = {
                 if(row.cat_id == 1){
                     var ddv = $(this).datagrid('getRowDetail',index).find('table.ddv');
                     ddv.datagrid({
-                    url:site_url + 'datagrid_data1.json',
+                        url:site_url + 'datagrid_data1.json',
                         fitColumns:false,
                         singleSelect:true,
                         rownumbers:true,
+                        toolbar: [
+                            {
+                                text: '',
+                                iconCls: 'fa fa-plus green',
+                                handler: function(){
+                                }
+                            },
+                        ],
                         loadMsg:'',
                         height:'auto',
                         columns:[[
@@ -107,7 +116,7 @@ var job_order_details = {
             ],
             onRowContextMenu: function(e, index, row){
                 e.preventDefault();
-                if(row && row.cat_id == 1 && !parseFloat(row.cd_length) ){
+                /*if(row && row.cat_id == 1 && !parseFloat(row.cd_length) ){
                     $(e.target).parents('tr').addClass('datagrid-context-menu');
                     $('#breakdown-menu').menu('show', {
                         left: e.pageX,
@@ -117,7 +126,7 @@ var job_order_details = {
                             $(e.target).parents('tr').removeClass('datagrid-context-menu');
                         }
                     });
-                }
+                }*/
             }
         });
 

@@ -8,7 +8,7 @@ class Job_Orders_model extends CI_Model {
         parent::__construct();
     }
 
-    public function getJO($contract_id = null){
+    public function getJO($jo_id = null){
 
         $sql = "SELECT
                   jo_id,
@@ -37,52 +37,30 @@ class Job_Orders_model extends CI_Model {
                   SELECT cc_c_id, sum(cc_amount) as tot_charges FROM  contract_charges GROUP by cc_c_id
                 ) as extra_charges ON cc_c_id = c_id WHERE 1 = 1";
 
-        if($contract_id){
-            $sql .= " AND c_id = " . $contract_id;
+        if($jo_id){
+            $sql .= " AND jo_id = " . $jo_id;
         }
 
         $query = $this->db->query($sql);
 
-//        pre_print($query->result()); die;
-
         return $query->result();
     }
 
-    public function getContractDetails($contract_id = null){
 
-        $sql = "SELECT
-                  cat_id,
-                  cat_name,
-                  cd_id,
-                  cd_thickness,
-                  cd_width,
-                  cd_length,
-                  cd_qty,
-                  cd_unit,
-                  p_name,
-                  cd_unit_price
-                FROM contract_details
-                LEFT JOIN products ON p_id = cd_p_id
-                LEFT JOIN categories ON cat_id = p_cat_id
-                WHERE cd_c_id = ?";
+    /*
+     * Get Contracts without Job Order
+     * */
+    public function getAvailableContract($c_id = null){
 
-        $query = $this->db->query($sql, array($contract_id));
-        return $query->result();
+        $sql = "SELECT * FROM contracts
+                LEFT JOIN job_orders ON jo_c_id = c_id
+                WHERE jo_c_id IS NULL";
 
-    }
+        if($c_id){
+            $sql .= " OR c_id = $c_id";
+        }
 
-    public function getContractCharges($contract_id = null){
-        $sql = "SELECT
-                  cc_amount,
-                  chrg_name,
-                  chrg_type,
-                  chrg_type_name
-                FROM contract_charges
-                LEFT JOIN charges ON chrg_id = cc_chrg_id
-                LEFT JOIN charge_types ON chrg_type_id = chrg_type
-                WHERE cc_c_id = ?";
-
-        $query = $this->db->query($sql, array($contract_id));
+        $query = $this->db->query($sql);
 
         return $query->result();
     }

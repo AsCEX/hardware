@@ -9,6 +9,9 @@ var job_orders = {
     jo_id: 0,
 
     datagrid: function() {
+
+        self = this;
+
         $('#dg-job-orders').datagrid({
             url: site_url + "job_orders/getJO",
             pagination:true,
@@ -44,8 +47,9 @@ var job_orders = {
             onRowContextMenu: function(e, index, row){
                 e.preventDefault();
                 if(row){
+                    console.log(row.jo_id);
 
-                    this.jo_id = row.jo_id;
+                    self.jo_id = row.jo_id;
 
                     $(e.target).parents('tr').addClass('datagrid-context-menu');
                     $('#job-orders-menu').menu('show', {
@@ -84,7 +88,8 @@ var job_orders = {
     },
 
     order_details: function(){
-        $('#dlg-job-order-details').dialog('open').dialog('refresh', site_url + 'job_orders/joDetails/' + this.jo_id).dialog('center').dialog('setTitle','Order Details');
+        self = this;
+        $('#dlg-job-order-details').dialog('open').dialog('refresh', site_url + 'job_orders/joDetails/' + self.jo_id).dialog('center').dialog('setTitle','Order Details');
     }
 
 }

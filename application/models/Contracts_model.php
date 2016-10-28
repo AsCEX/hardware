@@ -35,11 +35,48 @@ class Contracts_model extends CI_Model {
                 ) as material_cost ON material_cost.cd_c_id = c_id
                 LEFT JOIN (
                   SELECT cc_c_id, sum(cc_amount) as tot_charges FROM  contract_charges GROUP by cc_c_id
-                ) as extra_charges ON cc_c_id = c_id WHERE 1 = 1";
+                ) as extra_charges ON cc_c_id = c_id WHERE c_status = 1";
 
         if($contract_id){
             $sql .= " AND c_id = " . $contract_id;
         }
+
+        $query = $this->db->query($sql);
+
+//        pre_print($query->result()); die;
+
+        return $query->result();
+    }
+
+    public function getContractsById($contract_id = 0){
+
+        $sql = "SELECT
+                  c_id,
+                  c_date,
+                  c_cust_id,
+                  c_project,
+                  c_location,
+                  c_sales_rep,
+                  c_reference,
+                  c_terms_of_payment,
+                  c_delivery_instruction,
+                  c_status,
+                  c_clr_id,
+                  cust_company,
+                  cust_address,
+                  cust_owner,
+                  mat_cost,
+                  tot_charges,
+                  tot_charges+mat_cost as grand_cost
+                FROM contracts
+                LEFT JOIN customers ON cust_id = c_cust_id
+                LEFT JOIN (
+                  SELECT cd_c_id, sum(cd_qty * cd_unit_price) as mat_cost FROM contract_details GROUP by cd_c_id
+                ) as material_cost ON material_cost.cd_c_id = c_id
+                LEFT JOIN (
+                  SELECT cc_c_id, sum(cc_amount) as tot_charges FROM  contract_charges GROUP by cc_c_id
+                ) as extra_charges ON cc_c_id = c_id WHERE c_status = 1 AND c_id = " . $contract_id;
+
 
         $query = $this->db->query($sql);
 

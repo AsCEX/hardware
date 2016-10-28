@@ -13,6 +13,15 @@ var contracts = {
         $('#dg-contracts').datagrid({
             url: site_url + "contracts/getContracts",
             pagination:true,
+            toolbar: [
+                {
+                    text: 'Add Contract',
+                    iconCls: 'fa fa-plus green',
+                    handler: function(){
+                        contracts.new()
+                    }
+                },
+            ],
             pageSize:10,
             rownumbers:true,
             fitColumns:false,
@@ -82,6 +91,11 @@ var contracts = {
         });
     },
 
+    new: function(){
+        this.contract_id = 0;
+        this.order_details();
+    },
+
     order_details: function(){
         $('#dlg-order-details').dialog('open').dialog('refresh', site_url + 'contracts/contractDetails/' + this.contract_id).dialog('center').dialog('setTitle','Order Details');
     },
@@ -96,7 +110,7 @@ var contracts = {
             success: function(response){
                 $.messager.alert('Message','Successful', 'info', function(){
                     $('#dlg-order-details').dialog('close');
-                    $('#dlg-order-details').datagrid('reload');
+                    $('#dg-contracts').datagrid('reload');
                 });
             }
         });
