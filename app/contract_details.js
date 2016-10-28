@@ -143,10 +143,13 @@ var contract_details = {
             modal: true,
             closed: true,
             cls: 'c6',
+            onLoad: function() {
+                $("form#fm-contract-material input#cd_c_id").val(self.contract_id);
+            },
             buttons:[{
                 text:'Save',
                 handler:function(){
-
+                    contract_details.saveContractMaterial();
                 }
             },{
                 text:'Close',
@@ -193,5 +196,20 @@ var contract_details = {
             }
         });
     },
+
+    saveContractMaterial: function() {
+        $('#fm-contract-material').form('submit',{
+            url: site_url + 'contract_details/saveContractMaterial',
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(result){
+                $.messager.alert('Message','Successful', 'info', function(){
+                    $("#material-form-dialog").dialog('close');
+                    $('#dg-contract-details').datagrid('reload');
+                });
+            }
+        });
+    }
 
 }
