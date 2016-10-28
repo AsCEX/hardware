@@ -95,6 +95,15 @@ class Contracts extends MY_Controller {
             ->set_content_type('application/json')
             ->set_output(json_encode($resultSet) );
     }
+
+    public function save(){
+        $data = $_POST;
+
+        $c_id = $data['c_id'];
+        unset($data['c_id']);
+
+        $this->contracts_model->save($data, $c_id);
+    }
 }
 
 ?>

@@ -50,10 +50,10 @@
 
             </div>
             <div id="transactions" style="width:250px;">
-                <div class="menu-links" data-url="<?php echo site_url('contracts'); ?>" >Sales Contract</div>
-                <div class="menu-links" data-url="<?php echo site_url('job_orders'); ?>" >Job Orders</div>
-                <div class="menu-links" data-url="<?php echo site_url('job_orders'); ?>" >Ammendments</div>
-                <div class="menu-links" data-url="" >Deliveries</div>
+                <div class="menu-links" data-url="<?php echo site_url('contracts'); ?>" data-options="iconCls:'fa fa-calendar-check-o'" >Sales Contract</div>
+                <div class="menu-links" data-url="<?php echo site_url('job_orders'); ?>" data-options="iconCls:'fa fa-list-alt'" >Job Orders</div>
+                <div class="menu-links" data-url="<?php echo site_url('job_orders'); ?>" data-options="iconCls:'fa fa-check-square-o'" >Ammendments</div>
+                <div class="menu-links" data-url=""  data-options="iconCls:'fa fa-truck'">Deliveries</div>
             </div>
             <div id="inventory" style="width:250px;">
                 <div class="menu-links" data-url="<?php echo site_url('materials'); ?>" data-options="iconCls:'fa fa-home'" >Materials</div>

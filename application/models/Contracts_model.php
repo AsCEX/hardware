@@ -13,6 +13,7 @@ class Contracts_model extends CI_Model {
         $sql = "SELECT
                   c_id,
                   c_date,
+                  c_cust_id,
                   c_project,
                   c_location,
                   c_sales_rep,
@@ -84,6 +85,16 @@ class Contracts_model extends CI_Model {
         $query = $this->db->query($sql, array($contract_id));
 
         return $query->result();
+    }
+
+    public function save($data, $id = null){
+        if ( $id ) {
+            $this->db->where("c_id", $id);
+            $this->db->update('contracts', $data);
+            return $id;
+        } else {
+            return $this->db->insert('contracts', $data) ? TRUE : FALSE;
+        }
     }
 
 }

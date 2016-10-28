@@ -5,7 +5,7 @@ class Customers extends MY_Controller {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model('Customers_model');
+        $this->load->model('customers_model');
     }
 
     public function index()
@@ -15,7 +15,7 @@ class Customers extends MY_Controller {
 
     public function getCustomersGrid() {
 
-        $customers = $this->Customers_model->getCustomersGrid();
+        $customers = $this->customers_model->getCustomersGrid();
 
         $resultSet['rows'] = $customers;
         $resultSet['total'] = count($customers);
@@ -28,7 +28,7 @@ class Customers extends MY_Controller {
     public function saveCustomer() {
 
         $post = $_POST;
-        $cust_id = $this->Customers_model->save($post, $post['cust_id'], $post['cust_ui_id']);
+        $cust_id = $this->customers_model->save($post, $post['cust_id'], $post['cust_ui_id']);
 
         if ( $cust_id ) {
 
@@ -40,7 +40,7 @@ class Customers extends MY_Controller {
 
     public function deleteCustomer() {
 
-        $delCust = $this->Customers_model->delete( $_POST );
+        $delCust = $this->customers_model->delete( $_POST );
 
         if ( $delCust ) {
 
@@ -52,10 +52,30 @@ class Customers extends MY_Controller {
 
     public function dialog( $cust_id = 0 ){
 
-        $customer = $this->Customers_model->getCustomerById( $cust_id );
+        $customer = $this->customers_model->getCustomerById( $cust_id );
 
         $data['customer'] = ($customer) ? $customer : array();
 
         $this->load->view('customers/dialog/add', $data);
+    }
+
+    public function getCustomersCombobox() {
+
+        $customers = $this->customers_model->getCustomersGrid();
+
+        $customers_data = array();
+
+        foreach ($customers as $c) {
+
+            $temp = array(
+                'id' => $c->cust_id,
+                'text' => $c->cust_company
+            );
+            $customers_data[] = $temp;
+        }
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($customers_data) );
     }
 }

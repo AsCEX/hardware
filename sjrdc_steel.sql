@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-10-26 08:10:07
+Date: 2016-10-28 11:31:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -156,6 +156,7 @@ CREATE TABLE `contracts` (
   `c_status` tinyint(1) DEFAULT NULL,
   `c_terms_of_payment` varchar(100) DEFAULT NULL,
   `c_delivery_instruction` varchar(100) DEFAULT NULL,
+  `c_clr_id` bigint(20) DEFAULT NULL,
   `o_created_date` date DEFAULT NULL,
   `o_created_by` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`c_id`)
@@ -164,8 +165,8 @@ CREATE TABLE `contracts` (
 -- ----------------------------
 -- Records of contracts
 -- ----------------------------
-INSERT INTO `contracts` VALUES ('1', '1', '2016-10-10', 'Proposed LFC Admin Bldg.', 'Maryknoll Drive, Sasa, Davao City', 'NEG', 'P. Plan', '0', '50% D/P upon signing of contract, 50% FP upon delivery', 'Deliver To Site', null, null);
-INSERT INTO `contracts` VALUES ('2', '2', '2016-10-18', 'Proposed Residential Bldg', 'Tandag, Surigao Del Sur', 'AGE', 'Q. GIVEN', '1', '50% D/P upon signing of contract, 50% FP upon delivery', 'Picu up @ Davao Plant', null, null);
+INSERT INTO `contracts` VALUES ('1', '1', '2016-10-10', 'Proposed LFC Admin Bldg.', 'Maryknoll Drive, Sasa, Davao City', 'NEG', 'P. Plan', '0', '50% D/P upon signing of contract, 50% FP upon delivery', 'Deliver To Site', '1', null, null);
+INSERT INTO `contracts` VALUES ('2', '2', '2016-10-18', 'Proposed Residential Bldg', 'Tandag, Surigao Del Sur', 'AGE', 'Q. GIVEN', '1', '50% D/P upon signing of contract, \r\n50% FP upon delivery', 'Picu up @ Davao Plant', '7', null, null);
 
 -- ----------------------------
 -- Table structure for `contract_charges`

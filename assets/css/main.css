@@ -118,3 +118,5 @@ body > .layout-panel-center > .panel-header > .panel-title{
     background: linear-gradient(to bottom,#2984a4 0,#24748f 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#2984a4,endColorstr=#24748f,GradientType=0);
 }
+
+.menu.menu-top{ overflow:hidden!important;}

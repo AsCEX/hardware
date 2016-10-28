@@ -71,7 +71,7 @@ var contracts = {
             buttons:[{
                 text:'Save',
                 handler:function(){
-                    //employees.save();
+                    contracts.save();
                 }
             },{
                 text:'Close',
@@ -84,6 +84,22 @@ var contracts = {
 
     order_details: function(){
         $('#dlg-order-details').dialog('open').dialog('refresh', site_url + 'contracts/contractDetails/' + this.contract_id).dialog('center').dialog('setTitle','Order Details');
+    },
+
+    save: function(){
+
+        $('#contract-forms').form('submit',{
+            url: site_url + 'contracts/save',
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(response){
+                $.messager.alert('Message','Successful', 'info', function(){
+                    $('#dlg-order-details').dialog('close');
+                    $('#dlg-order-details').datagrid('reload');
+                });
+            }
+        });
     }
 
 }

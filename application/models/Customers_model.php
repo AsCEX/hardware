@@ -16,8 +16,7 @@ class Customers_model extends CI_Model
 
         $this->db->select("*");
         $this->db->where( "cust_status", 1 );
-        $this->db->join($this->tbl_user_info, "cust_ui_id = ui_id", "left");
-        $this->db->order_by("ui_lastname", "asc");
+        $this->db->order_by("cust_company", "asc");
 
         $rs = $this->db->get($this->tbl_customers);
 

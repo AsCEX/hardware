@@ -49,7 +49,7 @@
             <label>Measurement</label>
             <div class="row">
                 <div class="col-md-4">
-                    <input type="text" class="easyui-numberbox" value="0" style="width:100%;text-align:right;"/>
+                    <input type="text" class="easyui-numberbox" prompt="0" precision="2" style="width:100%;text-align:right;"/>
                     <!--<input id="thickness" class="easyui-combobox  input-sm" style="width:100%;"
                            url="<?php /*echo site_url('products/getProductThicknessComboBox/0'); */?>"
                            method="get"
@@ -60,7 +60,7 @@
                         />-->
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="easyui-numberbox" value="0" style="width:100%;text-align:right;"/>
+                    <input type="text" class="easyui-numberbox" prompt="0" precision="4" style="width:100%;text-align:right;"/>
                     <!--<input id="width" class="easyui-combobox  input-sm" style="width:100%;"
                            url="<?php /*echo site_url('products/getProductWidthComboBox/0'); */?>"
                            method="get"
@@ -71,7 +71,7 @@
                         />-->
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="easyui-numberbox" value="0" style="width:100%;text-align:right;"/>
+                    <input type="text" class="easyui-numberbox" prompt="0" precision="3" style="width:100%;text-align:right;"/>
                     <!--<input id="length" class="easyui-combobox  input-sm" style="width:100%;"
                            url="<?php /*echo site_url('products/getProductsLengthComboBox/0'); */?>"
                            method="get"
