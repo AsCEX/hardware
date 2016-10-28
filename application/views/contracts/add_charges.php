@@ -1,13 +1,41 @@
-<div class="row" style="padding:10px;margin:0px;">
-    <div class="col-md-12">
-        <div class="form-group">
-            <label>Charge Type</label>
-            <input type="text" class="form-control input-sm" value="Discount" />
-        </div>
-        <div class="form-group">
-            <label >Amount</label>
-            <input type="text" class="form-control input-sm" value="pcs">
-        </div>
+<form id="fm-contract-charges" method="post" novalidate>
+    <input type="hidden" id="cc_c_id" name="cc_c_id" value="">
+    <div class="row" style="padding:10px;margin:0px;">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>Type</label>
+                <input id="chrg_type" name="chrg_type" class="easyui-combobox input-sm" value="" style="width:100%;" required="required"
+                   url="<?php echo site_url('charge_types/getChargeTypesComboBox'); ?>"
+                   method="get"
+                   valueField="id"
+                   textField="text"
+                   editable="false"
+                   prompt="Select Type",
+                   data-options="onChange: changeChargeType"
+                />
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input id="chrg_name" name="chrg_name" class="easyui-combobox input-sm" value="" style="width:100%;" required="required"
+                   url="<?php echo site_url('charges/getChargesByChargeTypeComboBox/0'); ?>"
+                   method="get"
+                   valueField="id"
+                   textField="text"
+                   editable="false"
+                   prompt="Select Name"
+                />
+            </div>
+            <div class="form-group">
+                <label >Amount</label>
+                <input type="text" id="cc_amount" name="cc_amount" class="easyui-numberbox input-sm" value="0" precision="2" groupSeparator="," style="width:100%;" required>
+            </div>
 
+        </div>
     </div>
-</div>
+</form>
+
+<script>
+    function changeChargeType(newValue, oldValue){
+        $("#chrg_name").combobox('reload', site_url + 'charges/getChargesByChargeTypeComboBox/' + newValue).combobox('setValue', '');
+    }
+</script>

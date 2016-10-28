@@ -160,11 +160,15 @@ var contract_details = {
             resizable: true,
             modal: true,
             closed: true,
+            height: 'auto',
             cls: 'c6',
+            onLoad: function() {
+                $("form#fm-contract-charges input#cc_c_id").val(self.contract_id);
+            },
             buttons:[{
                 text:'Save',
                 handler:function(){
-
+                    contract_details.saveContractCharges();
                 }
             },{
                 text:'Close',
@@ -173,7 +177,21 @@ var contract_details = {
                 }
             }]
         });
-    }
+    },
 
+    saveContractCharges: function() {
+        $('#fm-contract-charges').form('submit',{
+            url: site_url + 'contract_charges/saveContractCharges',
+            onSubmit: function(){
+                return $(this).form('validate');
+            },
+            success: function(result){
+                $.messager.alert('Message','Successful', 'info', function(){
+                    $("#charges-form-dialog").dialog('close');
+                    $('#dg-contract-charges').datagrid('reload');
+                });
+            }
+        });
+    },
 
 }
