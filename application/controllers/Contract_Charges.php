@@ -13,6 +13,10 @@ class Contract_Charges extends MY_Controller
 
         $post = $_POST;
 
+        if ( $post['cc_c_id'] == 0 ) {
+            $post['cc_c_id'] = -abs($this->session->userdata('emp_id'));
+        }
+
         $contractCharge = $this->contract_charges_model->save( $post );
 
         if ( $contractCharge ) {

@@ -13,6 +13,10 @@ class Contract_Details extends MY_Controller
 
         $post = $_POST;
 
+        if ( $post['cd_c_id'] == 0 ) {
+            $post['cd_c_id'] = -abs($this->session->userdata('emp_id'));
+        }
+
         $contract_material = $this->contract_details_model->save( $post );
 
         if ( $contract_material ) {
