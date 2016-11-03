@@ -40,6 +40,11 @@ class Contracts extends MY_Controller {
     }
 
     public function getContractDetails($contract_id = null){
+
+        if($contract_id == 0){
+            $contract_id = -abs($this->session->userdata('emp_id'));
+        }
+
         $order_details = $this->contracts_model->getContractDetails($contract_id);
         $order_charges = $this->contracts_model->getContractCharges($contract_id);
 

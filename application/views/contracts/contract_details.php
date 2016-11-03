@@ -104,7 +104,7 @@
     <div class="menu-links" onclick="" >View Break Down</div>
 </div>
 
-<div id="material-form-dialog" style="height: 450px;width: 350px;"></div>
+<div id="material-form-dialog" style="height: 500px;width: 375px;"></div>
 <div id="charges-form-dialog" style="height: 250px;width: 350px;"></div>
 
 <script>

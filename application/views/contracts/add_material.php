@@ -47,12 +47,14 @@
                 />
             </div>
 
-            <div class="form-group">
-                <label>Measurement</label>
+            <div class="form-group ">
+
                 <div class="row">
-                    <div class="col-md-4">
-                        <input type="text" id="cd_thickness" name="cd_thickness" class="easyui-numberbox" prompt="0" precision="2" style="width:100%;text-align:right;"/>
-                        <!--<input id="thickness" class="easyui-combobox  input-sm" style="width:100%;"
+                    <div class="col-md-12 form-inline" style="margin-bottom: 5px;">
+                        <label style="width:120px;">Thickness</label>
+                        <div class="form-group">
+                            <input type="text" id="cd_thickness" name="cd_thickness" class="easyui-numberbox" prompt="0" precision="2" style="width:100%;text-align:right;"/>
+                            <!--<input id="thickness" class="easyui-combobox  input-sm" style="width:100%;"
                            url="<?php /*echo site_url('products/getProductThicknessComboBox/0'); */?>"
                            method="get"
                            valueField="id"
@@ -60,10 +62,13 @@
                            editable="false"
                            prompt="T"
                         />-->
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <input type="text" id="cd_width" name="cd_width" class="easyui-numberbox" prompt="0" precision="4" style="width:100%;text-align:right;"/>
-                        <!--<input id="width" class="easyui-combobox  input-sm" style="width:100%;"
+                    <div class="col-md-12 form-inline" style="margin-bottom: 5px;">
+                        <label style="width:120px;">Width</label>
+                        <div class="form-group">
+                            <input type="text" id="cd_width" name="cd_width" class="easyui-numberbox" prompt="0" precision="4" style="width:100%;text-align:right;"/>
+                            <!--<input id="width" class="easyui-combobox  input-sm" style="width:100%;"
                            url="<?php /*echo site_url('products/getProductWidthComboBox/0'); */?>"
                            method="get"
                            valueField="id"
@@ -71,10 +76,14 @@
                            editable="false"
                            prompt="W"
                         />-->
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <input type="text" id="cd_length" name="cd_length" class="easyui-numberbox" prompt="0" precision="3" style="width:100%;text-align:right;"/>
-                        <!--<input id="length" class="easyui-combobox  input-sm" style="width:100%;"
+
+                    <div class="col-md-12 form-inline">
+                        <label style="width:120px;">Length</label>
+                        <div class="form-group">
+                            <input type="text" id="cd_length" name="cd_length" class="easyui-numberbox" prompt="0" precision="3" style="width:100%;text-align:right;"/>
+                            <!--<input id="length" class="easyui-combobox  input-sm" style="width:100%;"
                            url="<?php /*echo site_url('products/getProductsLengthComboBox/0'); */?>"
                            method="get"
                            valueField="id"
@@ -82,6 +91,7 @@
                            editable="false"
                            prompt="L"
                         />-->
+                        </div>
                     </div>
                 </div>
             </div>
