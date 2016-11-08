@@ -13,9 +13,9 @@ class Categories extends MY_Controller {
         //$this->load->view('contracts/index');
     }
 
-    public function getCategoryComboBox() {
+    public function getCategoryComboBox( $cat_id = null ) {
 
-        $cat = $this->categories_model->getCategories();
+        $cat = $this->categories_model->getCategories( $cat_id );
 
         $cat_data = array();
 

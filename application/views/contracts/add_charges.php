@@ -1,5 +1,6 @@
 <form id="fm-contract-charges" method="post" novalidate>
     <input type="hidden" id="cc_c_id" name="cc_c_id" value="">
+    <input type="hidden" id="cc_id" name="cc_id" value="<?php echo isset($contract_charge->cc_id) ? $contract_charge->cc_id : "";?>">
     <div class="row" style="padding:10px;margin:0px;">
         <div class="col-md-12">
             <div class="form-group">
@@ -27,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label >Amount</label>
-                <input type="text" id="cc_amount" name="cc_amount" class="easyui-numberbox input-sm" value="0" precision="2" groupSeparator="," style="width:100%;" required>
+                <input type="text" id="cc_amount" name="cc_amount" class="easyui-numberbox input-sm" value="<?php echo isset($contract_charge->cc_amount) ? $contract_charge->cc_amount : ""; ?>" precision="2" groupSeparator="," style="width:100%;" required>
             </div>
 
         </div>

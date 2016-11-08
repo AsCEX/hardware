@@ -110,6 +110,7 @@ class Contracts_model extends CI_Model {
 
     public function getContractCharges($contract_id = null){
         $sql = "SELECT
+                  cc_id,
                   cc_amount,
                   chrg_name,
                   chrg_type,

@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Products_model extends CI_Model {
 
-    public $tbl_colors = "colors";
+    public $tbl_products = "products";
 
     public function __construct()
     {

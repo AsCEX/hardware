@@ -16,7 +16,7 @@ class Categories_model extends CI_Model {
         $sql = "SELECT * FROM categories";
 
         if($cat_id){
-            $sql .= "WHERE cat_id = " . $cat_id;
+            $sql .= " WHERE cat_id = " . $cat_id;
         }
 
         $query = $this->db->query($sql);

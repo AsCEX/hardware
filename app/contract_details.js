@@ -25,9 +25,17 @@ var contract_details = {
                     text: 'Add Material',
                     iconCls: 'fa fa-plus',
                     handler: function(){
+                        $('#dg-contract-details').datagrid('unselectAll');
                         $('#material-form-dialog').dialog('open').dialog('refresh', site_url + 'contracts/addMaterialView').dialog('setTitle', 'Add Material');
                     }
                 },
+                {
+                    text: 'Edit Material',
+                    iconCls: 'fa fa-edit',
+                    handler: function() {
+                        contract_details.updateMaterial();
+                    }
+                }
             ],
             view: groupview,
             groupField:'cat_name',
@@ -63,9 +71,10 @@ var contract_details = {
                                         m.push( (parseFloat(row.cd_length)) ? parseFloat(row.cd_length).toFixed(2) : 'L.S.' );
 
                                     return m.join(' x ');
-                                }else{
-                                    return value.description;
                                 }
+                                //else{
+                                //    return value.description;
+                                //}
                         }
                     },
                     {field:'cd_unit_price',title:'Unit Price',width:'10%',align:'right',
@@ -117,6 +126,13 @@ var contract_details = {
                         $('#charges-form-dialog').dialog('open').dialog('refresh', site_url + 'contracts/addChargesView').dialog('setTitle', 'Add Charges');
                     }
                 },
+                {
+                    text: 'Edit Charges',
+                    iconCls: 'fa fa-edit',
+                    handler: function() {
+                        contract_details.updateCharge();
+                    }
+                }
             ],
             groupField:'chrg_type_name',
             groupFormatter:function(value,rows){
@@ -145,6 +161,21 @@ var contract_details = {
             cls: 'c6',
             onLoad: function() {
                 $("form#fm-contract-material input#cd_c_id").val(self.contract_id);
+                var row = $('#dg-contract-details').datagrid('getSelected');
+                if (row) {
+                    $("#fm-contract-material #cd_unit").combobox('setValue', row.cd_unit);
+                    $.ajax({
+                        url: site_url + 'categories/getCategoryComboBox/' + row.cat_id,
+                        success: function(response) {
+                            $("#fm-contract-material #product_category").combobox('setValue', response[0].id);
+                        }
+                    });
+                    $("form#fm-contract-material #cd_p_id").combobox('reload', site_url + 'products/getProductsByCategoryComboBox/' + row.cat_id).combobox({
+                        onLoadSuccess: function() {
+                            $("#fm-contract-material #cd_p_id").combobox('clear');
+                        }
+                    });
+                }
             },
             buttons:[{
                 text:'Save',
@@ -210,6 +241,20 @@ var contract_details = {
                 });
             }
         });
+    },
+
+    updateMaterial: function() {
+        var row = $('#dg-contract-details').datagrid('getSelected');
+        if ( row ) {
+            $('#material-form-dialog').dialog('open').dialog('refresh', site_url + 'contract_details/dialog/' + row.cd_id).dialog('setTitle', 'Edit Material');
+        }
+    },
+
+    updateCharge: function() {
+        var row = $('#dg-contract-charges').datagrid('getSelected');
+        if ( row ) {
+            $("#charges-form-dialog").dialog('open').dialog('refresh', site_url + 'contract_charges/dialog/' + row.cc_id).dialog('setTitle', 'Edit Charge');
+        }
     }
 
 }

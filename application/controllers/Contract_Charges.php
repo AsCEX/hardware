@@ -26,6 +26,15 @@ class Contract_Charges extends MY_Controller
         }
 
     }
+
+    public function dialog( $cc_id = 0 ) {
+
+        $contract_charge = $this->contract_charges_model->getContractChargeById( $cc_id );
+
+        $data['contract_charge'] = ($contract_charge) ? $contract_charge : array();
+        $this->load->view('contracts/add_charges', $data);
+
+    }
 }
 
 
