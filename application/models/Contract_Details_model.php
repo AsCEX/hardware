@@ -48,6 +48,8 @@ class Contract_Details_model extends CI_Model
 
     public function getContractDetailsById( $cd_id ) {
 
+        $this->db->join("products", "p_id = cd_p_id", "left");
+        $this->db->join("categories", "cat_id = p_cat_id", "left");
         $this->db->where( "cd_id", $cd_id );
         $contract_detail = $this->db->get($this->tbl_contract_details);
 

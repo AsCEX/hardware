@@ -7,6 +7,7 @@ var job_order_details = {
         this.jo_id = jo_id;
         this.contract_id = contract_id;
         this.datagrid();
+        this.dialog();
     },
 
     datagrid: function() {
@@ -19,7 +20,12 @@ var job_order_details = {
             fitColumns: true,
             showFooter: true,
             singleSelect: true,
-            view: detailview,
+            view: groupview,
+            groupField:'cat_name',
+            groupFormatter:function(value,rows){
+                return value;
+            },
+            /*view: detailview,
             detailFormatter: function(index,row){
                 return '<div style="padding:0px"><table class="ddv"></table></div>';
             },
@@ -60,7 +66,7 @@ var job_order_details = {
                 }else{
                     return false;
                 }
-            },
+            },*/
             columns:[
                 [
                     {field:'cd_qty',title:'Qty',width:'10%',align:'right',
@@ -116,7 +122,7 @@ var job_order_details = {
             ],
             onRowContextMenu: function(e, index, row){
                 e.preventDefault();
-                /*if(row && row.cat_id == 1 && !parseFloat(row.cd_length) ){
+                if(row && row.cat_id == 1 && !parseFloat(row.cd_length) ){
                     $(e.target).parents('tr').addClass('datagrid-context-menu');
                     $('#breakdown-menu').menu('show', {
                         left: e.pageX,
@@ -126,7 +132,7 @@ var job_order_details = {
                             $(e.target).parents('tr').removeClass('datagrid-context-menu');
                         }
                     });
-                }*/
+                }
             }
         });
 
@@ -153,6 +159,37 @@ var job_order_details = {
         });
 
     },
+
+
+    dialog: function(){
+
+        $("#dlg-job-breakdown-details").dialog({
+            resizable: false,
+            modal: true,
+            closed: true,
+            cls: 'c6',
+            onLoad: function() {
+                $("form#fm-contract-material input#cd_c_id").val(self.contract_id);
+            },
+            buttons:[{
+                text:'Save',
+                handler:function(){
+                    contract_details.saveContractMaterial();
+                }
+            },{
+                text:'Close',
+                handler:function(){
+                    $("#dlg-job-breakdown-details").dialog('close');
+                }
+            }]
+        });
+
+    },
+
+    open_breakdown: function(){
+        $('#dlg-job-breakdown-details').dialog('open').dialog('refresh', site_url + 'job_orders/order_breakdown').dialog('setTitle', 'Breakdown');
+    }
+
 
 
 }

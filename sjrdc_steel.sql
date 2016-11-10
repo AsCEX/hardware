@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50626
 File Encoding         : 65001
 
-Date: 2016-10-28 11:31:57
+Date: 2016-11-06 23:55:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -160,13 +160,14 @@ CREATE TABLE `contracts` (
   `o_created_date` date DEFAULT NULL,
   `o_created_by` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of contracts
 -- ----------------------------
 INSERT INTO `contracts` VALUES ('1', '1', '2016-10-10', 'Proposed LFC Admin Bldg.', 'Maryknoll Drive, Sasa, Davao City', 'NEG', 'P. Plan', '0', '50% D/P upon signing of contract, 50% FP upon delivery', 'Deliver To Site', '1', null, null);
 INSERT INTO `contracts` VALUES ('2', '2', '2016-10-18', 'Proposed Residential Bldg', 'Tandag, Surigao Del Sur', 'AGE', 'Q. GIVEN', '1', '50% D/P upon signing of contract, \r\n50% FP upon delivery', 'Picu up @ Davao Plant', '7', null, null);
+INSERT INTO `contracts` VALUES ('5', '1', '2016-01-01', 'xxxxx', 'xxxxx', 'x', 'x', '1', 'x', 'x', '2', null, null);
 
 -- ----------------------------
 -- Table structure for `contract_charges`
@@ -204,7 +205,7 @@ CREATE TABLE `contract_details` (
   `cd_unit` varchar(20) DEFAULT NULL,
   `cd_unit_price` decimal(11,2) DEFAULT NULL,
   PRIMARY KEY (`cd_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of contract_details
@@ -218,6 +219,27 @@ INSERT INTO `contract_details` VALUES ('6', '2', '9', null, '0.4000', '0.3050', 
 INSERT INTO `contract_details` VALUES ('7', '2', '12', null, '0.4000', '0.6100', '2.4400', '2.00', 'pcs', '235.00');
 INSERT INTO `contract_details` VALUES ('8', '2', '14', null, '0.4000', '0.6100', '2.4400', '12.00', 'pcs', '235.00');
 INSERT INTO `contract_details` VALUES ('9', '2', '15', null, '0.4000', '0.4570', '2.4400', '4.00', 'pcs', '176.25');
+INSERT INTO `contract_details` VALUES ('10', '0', '1', null, '1.0000', '1.0000', '1.0000', '1.00', 'pcs', '100.00');
+INSERT INTO `contract_details` VALUES ('11', '0', '1', null, '13.0000', '31.0000', '1.0000', '4.00', 'pcs', '1312.00');
+INSERT INTO `contract_details` VALUES ('12', '-1', '2', null, '1.0000', '1.0000', '0.0000', '1.00', 'pcs', '1111.00');
+INSERT INTO `contract_details` VALUES ('13', '5', '1', null, '1.0000', '11.0000', '1.0000', '1.00', 'Lm', '111.00');
+
+-- ----------------------------
+-- Table structure for `contract_detail_breakdown`
+-- ----------------------------
+DROP TABLE IF EXISTS `contract_detail_breakdown`;
+CREATE TABLE `contract_detail_breakdown` (
+  `cdb_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `cdb_qty` decimal(11,2) DEFAULT NULL,
+  `cdb_unit` varchar(20) DEFAULT NULL,
+  `cdb_thickness` decimal(11,3) DEFAULT NULL,
+  `cdb_cd_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`cdb_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of contract_detail_breakdown
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `customers`

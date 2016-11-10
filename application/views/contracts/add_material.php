@@ -12,7 +12,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label >Unit</label>
-                <input class="easyui-combobox" id="cd_unit" name="cd_unit" style="width:100%;" value="pcs"
+                <input class="easyui-combobox" id="cd_unit" name="cd_unit" style="width:100%;" value="<?php echo isset($contract_detail->cd_unit) ? $contract_detail->cd_unit : 'pcs'; ?>"
                        data-options="
                             valueField: 'label',
                             textField: 'value',
@@ -26,27 +26,14 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label>Category</label>
-                <input id="product_category" class="easyui-combobox  input-sm" style="width:100%;"
-                       url="<?php echo site_url('categories/getCategoryComboBox'); ?>"
-                       method="get"
-                       valueField="id"
-                       textField="text"
-                       editable="false"
-                       prompt="Select Category",
-                       data-options="onChange: changeCategory"
-                />
+                <?php $cat_id = isset($contract_detail->cat_id) ? $contract_detail->cat_id : ''; ?>
+                <input id="product_category" class="input-sm" style="width:100%;" value="<?php echo $cat_id; ?>"/>
             </div>
 
             <div class="form-group">
                 <label>Product</label>
-                <input id="cd_p_id" name="cd_p_id" class="easyui-combobox  input-sm" style="width:100%;" required
-                       url="<?php echo site_url('products/getProductsByCategoryComboBox/0'); ?>"
-                       method="get"
-                       valueField="id"
-                       textField="text"
-                       editable="false"
-                       prompt="Select Product"
-                />
+                <?php $p_id = isset($contract_detail->cd_p_id) ? $contract_detail->cd_p_id : 0; ?>
+                <input id="cd_p_id" name="cd_p_id" class="input-sm" style="width:100%;" value="<?php echo $p_id;?>" />
             </div>
 
             <div class="form-group ">
@@ -56,28 +43,13 @@
                         <label style="width:120px;">Thickness</label>
                         <div class="form-group">
                             <input type="text" id="cd_thickness" name="cd_thickness" class="easyui-numberbox" prompt="0" precision="2" style="width:100%;text-align:right;" value="<?php echo isset($contract_detail->cd_thickness) ? $contract_detail->cd_thickness : ''; ?>" />
-                            <!--<input id="thickness" class="easyui-combobox  input-sm" style="width:100%;"
-                           url="<?php /*echo site_url('products/getProductThicknessComboBox/0'); */?>"
-                           method="get"
-                           valueField="id"
-                           textField="text"
-                           editable="false"
-                           prompt="T"
-                        />-->
+
                         </div>
                     </div>
                     <div class="col-md-12 form-inline" style="margin-bottom: 5px;">
                         <label style="width:120px;">Width</label>
                         <div class="form-group">
                             <input type="text" id="cd_width" name="cd_width" class="easyui-numberbox" prompt="0" precision="4" style="width:100%;text-align:right;" value="<?php echo isset($contract_detail->cd_width) ? $contract_detail->cd_width : ''; ?>" />
-                            <!--<input id="width" class="easyui-combobox  input-sm" style="width:100%;"
-                           url="<?php /*echo site_url('products/getProductWidthComboBox/0'); */?>"
-                           method="get"
-                           valueField="id"
-                           textField="text"
-                           editable="false"
-                           prompt="W"
-                        />-->
                         </div>
                     </div>
 
@@ -85,14 +57,6 @@
                         <label style="width:120px;">Length</label>
                         <div class="form-group">
                             <input type="text" id="cd_length" name="cd_length" class="easyui-numberbox" prompt="0" precision="3" style="width:100%;text-align:right;" value="<?php echo isset($contract_detail->cd_length) ? $contract_detail->cd_length : ''; ?>" />
-                            <!--<input id="length" class="easyui-combobox  input-sm" style="width:100%;"
-                           url="<?php /*echo site_url('products/getProductsLengthComboBox/0'); */?>"
-                           method="get"
-                           valueField="id"
-                           textField="text"
-                           editable="false"
-                           prompt="L"
-                        />-->
                         </div>
                     </div>
                 </div>
@@ -107,11 +71,31 @@
 </form>
 
 <script>
-    $(function(){
-        //$("#product_category").combobox('onChange')
-    });
+    function init_am(){
 
-    function changeCategory(newValue, oldValue){
+        $("#cd_p_id").combobox({
+            url: "<?php echo site_url('products/getProductsByCategoryComboBox/' . $cat_id); ?>",
+            method: 'get',
+            valueField: 'id',
+            textField: 'text',
+            editable: false,
+            prompt: 'Select Product'
+        });
+
+        $("#product_category").combobox({
+            url: "<?php echo site_url('categories/getCategoryComboBox'); ?>",
+            method: 'get',
+            valueField: 'id',
+            textField: 'text',
+            editable: false,
+            prompt: 'Select Category',
+            onChange: changeCategory
+        });
+    }
+
+    function changeCategory(newValue, oldValue){ console.log("Triggered");
         $("form#fm-contract-material #cd_p_id").combobox('reload', site_url + 'products/getProductsByCategoryComboBox/' + newValue).combobox('setValue', '');
     }
+
+    init_am();
 </script>

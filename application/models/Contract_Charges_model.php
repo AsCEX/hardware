@@ -39,6 +39,8 @@ class Contract_Charges_model extends CI_Model
 
     public function getContractChargeById( $cc_id ) {
 
+        $this->db->join("charges", "chrg_id = cc_chrg_id", "left");
+        $this->db->join("charge_types", "chrg_type_id = chrg_type", "left");
         $this->db->where( "cc_id", $cc_id );
         $contract_charge = $this->db->get($this->tbl_contract_charges);
         return $contract_charge->row();

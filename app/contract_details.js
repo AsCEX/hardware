@@ -7,6 +7,7 @@ var contract_details = {
         this.contract_id = contract_id;
         this.datagrid();
         this.dialog();
+
     },
 
     datagrid: function() {
@@ -18,7 +19,7 @@ var contract_details = {
             rownumbers:true,
             fitColumns: true,
             showFooter: true,
-            singleSelect: false,
+            singleSelect: true,
             ctrlSelect: true,
             toolbar: [
                 {
@@ -98,16 +99,21 @@ var contract_details = {
             ],
             onRowContextMenu: function(e, index, row){
                 e.preventDefault();
-                if(row && row.cat_id == 1 && !parseFloat(row.cd_length) ){
-                    $(e.target).parents('tr').addClass('datagrid-context-menu');
-                    $('#breakdown-menu').menu('show', {
-                        left: e.pageX,
-                        top: e.pageY
-                    }).menu({
-                        onHide: function(){
-                            $(e.target).parents('tr').removeClass('datagrid-context-menu');
-                        }
-                    });
+                $('#dg-contract-details').datagrid('selectRow', index);
+
+                $(e.target).parents('tr').addClass('datagrid-context-menu');
+                $('#breakdown-menu').menu('show', {
+                    left: e.pageX,
+                    top: e.pageY
+                }).menu({
+                    onHide: function(){
+                        $(e.target).parents('tr').removeClass('datagrid-context-menu');
+                    }
+                });
+
+                if(!(row && row.cat_id == 1 && !parseFloat(row.cd_length)) ){
+                    var item = $('#breakdown-menu').menu('findItem', 'View Break Down');
+                    $('#breakdown-menu').menu('disableItem', item.target);
                 }
             }
         });
@@ -116,6 +122,7 @@ var contract_details = {
         $('#dg-contract-charges').datagrid({
             url: site_url + "contracts/getContractCharges/" + self.contract_id,
             fitColumns: true,
+            singleSelect: true,
             showFooter: true,
             view: groupview,
             toolbar: [
@@ -160,7 +167,7 @@ var contract_details = {
             closed: true,
             cls: 'c6',
             onLoad: function() {
-                $("form#fm-contract-material input#cd_c_id").val(self.contract_id);
+                /*$("form#fm-contract-material input#cd_c_id").val(self.contract_id);
                 var row = $('#dg-contract-details').datagrid('getSelected');
                 if (row) {
                     $("#fm-contract-material #cd_unit").combobox('setValue', row.cd_unit);
@@ -175,7 +182,7 @@ var contract_details = {
                             $("#fm-contract-material #cd_p_id").combobox('clear');
                         }
                     });
-                }
+                }*/
             },
             buttons:[{
                 text:'Save',
@@ -196,9 +203,9 @@ var contract_details = {
             closed: true,
             height: 'auto',
             cls: 'c6',
-            onLoad: function() {
+            /*onLoad: function() {
                 $("form#fm-contract-charges input#cc_c_id").val(self.contract_id);
-            },
+            },*/
             buttons:[{
                 text:'Save',
                 handler:function(){

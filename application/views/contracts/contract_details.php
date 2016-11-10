@@ -40,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label >Date</label>
-                    <input type="text" name="c_date" class="easyui-textbox" value="<?php echo @$contract_details->c_date; ?>" style="width:100%" required="required">
+                    <input type="text" name="c_date" class="easyui-datebox date-masked" value="<?php echo @$contract_details->c_date; ?>" style="width:100%" required="required">
                 </div>
             </div>
             <div class="col-md-2">
@@ -102,11 +102,14 @@
 
 <div id="breakdown-menu" class="easyui-menu">
     <div class="menu-links" onclick="" >View Break Down</div>
+    <div class="menu-links" onclick="contract_details.updateMaterial()" >Edit Material</div>
 </div>
 
 <div id="material-form-dialog" style="height: 500px;width: 375px;"></div>
 <div id="charges-form-dialog" style="height: 250px;width: 350px;"></div>
 
 <script>
+    $(function(){
+    });
     contract_details.init(<?php echo $contract_id; ?>);
 </script>

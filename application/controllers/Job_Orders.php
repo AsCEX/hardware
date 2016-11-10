@@ -13,6 +13,11 @@ class Job_Orders extends MY_Controller {
         $this->load->view('job_orders/index');
     }
 
+    public function order_breakdown() {
+
+        $this->load->view('job_orders/orderline_breakdown');
+    }
+
     public function getJO(){
         $contracts = $this->job_orders_model->getJO();
 

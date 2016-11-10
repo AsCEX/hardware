@@ -39,7 +39,7 @@
 
 
 <div id="breakdown-menu" class="easyui-menu">
-    <div class="menu-links" onclick="" >View Break Down</div>
+    <div class="menu-links" onclick="job_order_details.open_breakdown()" >View Break Down</div>
 </div>
 
 <script>
