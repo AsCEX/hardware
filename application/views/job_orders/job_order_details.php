@@ -38,7 +38,7 @@
 </div>
 
 
-<div id="breakdown-menu" class="easyui-menu">
+<div id="jo-breakdown-menu" class="easyui-menu">
     <div class="menu-links" onclick="job_order_details.open_breakdown()" >View Break Down</div>
 </div>
 

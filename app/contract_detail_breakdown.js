@@ -19,10 +19,10 @@ var breakdown = {
             ctrlSelect: true,
             toolbar: [
                 {
-                    text: 'Add Material',
+                    text: 'Add Breakdown',
                     iconCls: 'fa fa-plus',
                     handler: function(){
-                        $('#material-form-dialog').dialog('open').dialog('refresh', site_url + 'contracts/addMaterialView').dialog('setTitle', 'Add Material');
+
                     }
                 },
             ],

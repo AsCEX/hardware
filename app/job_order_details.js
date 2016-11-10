@@ -124,7 +124,7 @@ var job_order_details = {
                 e.preventDefault();
                 if(row && row.cat_id == 1 && !parseFloat(row.cd_length) ){
                     $(e.target).parents('tr').addClass('datagrid-context-menu');
-                    $('#breakdown-menu').menu('show', {
+                    $('#jo-breakdown-menu').menu('show', {
                         left: e.pageX,
                         top: e.pageY
                     }).menu({
