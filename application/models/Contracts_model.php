@@ -22,6 +22,7 @@ class Contracts_model extends CI_Model {
                   c_delivery_instruction,
                   c_status,
                   c_clr_id,
+                  jo_id,
                   cust_company,
                   cust_address,
                   cust_owner,
@@ -29,6 +30,7 @@ class Contracts_model extends CI_Model {
                   tot_charges,
                   tot_charges+mat_cost as grand_cost
                 FROM contracts
+                LEFT JOIN job_orders ON jo_c_id = c_id
                 LEFT JOIN customers ON cust_id = c_cust_id
                 LEFT JOIN (
                   SELECT cd_c_id, sum(cd_qty * cd_unit_price) as mat_cost FROM contract_details GROUP by cd_c_id
@@ -62,6 +64,7 @@ class Contracts_model extends CI_Model {
                   c_delivery_instruction,
                   c_status,
                   c_clr_id,
+                  jo_id,
                   cust_company,
                   cust_address,
                   cust_owner,
@@ -69,6 +72,7 @@ class Contracts_model extends CI_Model {
                   tot_charges,
                   tot_charges+mat_cost as grand_cost
                 FROM contracts
+                LEFT JOIN job_orders ON jo_c_id = c_id
                 LEFT JOIN customers ON cust_id = c_cust_id
                 LEFT JOIN (
                   SELECT cd_c_id, sum(cd_qty * cd_unit_price) as mat_cost FROM contract_details GROUP by cd_c_id

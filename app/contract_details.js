@@ -2,9 +2,11 @@
 var contract_details = {
 
     contract_id: 0,
+    status: false,
 
-    init: function(contract_id) {
+    init: function(contract_id, status) {
         this.contract_id = contract_id;
+        this.status = status;
         this.datagrid();
         this.dialog();
 
@@ -25,6 +27,7 @@ var contract_details = {
                 {
                     text: 'Add Material',
                     iconCls: 'fa fa-plus',
+                    disabled: self.status,
                     handler: function(){
                         $('#dg-contract-details').datagrid('unselectAll');
                         $('#material-form-dialog').dialog('open').dialog('refresh', site_url + 'contracts/addMaterialView').dialog('setTitle', 'Add Material');
@@ -33,6 +36,7 @@ var contract_details = {
                 {
                     text: 'Edit Material',
                     iconCls: 'fa fa-edit',
+                    disabled: self.status,
                     handler: function() {
                         contract_details.updateMaterial();
                     }
@@ -129,6 +133,7 @@ var contract_details = {
                 {
                     text: 'Add Charges',
                     iconCls: 'fa fa-plus',
+                    disabled: self.status,
                     handler: function(){
                         $('#charges-form-dialog').dialog('open').dialog('refresh', site_url + 'contracts/addChargesView').dialog('setTitle', 'Add Charges');
                     }
@@ -136,6 +141,7 @@ var contract_details = {
                 {
                     text: 'Edit Charges',
                     iconCls: 'fa fa-edit',
+                    disabled: self.status,
                     handler: function() {
                         contract_details.updateCharge();
                     }
@@ -160,32 +166,17 @@ var contract_details = {
     },
 
     dialog: function(){
-
+        self = this;
         $("#material-form-dialog").dialog({
             resizable: true,
             modal: true,
             closed: true,
             cls: 'c6',
             onLoad: function() {
-                /*$("form#fm-contract-material input#cd_c_id").val(self.contract_id);
-                var row = $('#dg-contract-details').datagrid('getSelected');
-                if (row) {
-                    $("#fm-contract-material #cd_unit").combobox('setValue', row.cd_unit);
-                    $.ajax({
-                        url: site_url + 'categories/getCategoryComboBox/' + row.cat_id,
-                        success: function(response) {
-                            $("#fm-contract-material #product_category").combobox('setValue', response[0].id);
-                        }
-                    });
-                    $("form#fm-contract-material #cd_p_id").combobox('reload', site_url + 'products/getProductsByCategoryComboBox/' + row.cat_id).combobox({
-                        onLoadSuccess: function() {
-                            $("#fm-contract-material #cd_p_id").combobox('clear');
-                        }
-                    });
-                }*/
             },
             buttons:[{
                 text:'Save',
+                iconCls: 'fa fa-save',
                 handler:function(){
                     contract_details.saveContractMaterial();
                 }
@@ -251,9 +242,13 @@ var contract_details = {
     },
 
     updateMaterial: function() {
-        var row = $('#dg-contract-details').datagrid('getSelected');
-        if ( row ) {
-            $('#material-form-dialog').dialog('open').dialog('refresh', site_url + 'contract_details/dialog/' + row.cd_id).dialog('setTitle', 'Edit Material');
+        if(this.status){
+            $.messager.alert('Message','Permission Denied!', 'info');
+        }else{
+            var row = $('#dg-contract-details').datagrid('getSelected');
+            if ( row ) {
+                $('#material-form-dialog').dialog('open').dialog('refresh', site_url + 'contract_details/dialog/' + row.cd_id).dialog('setTitle', 'Edit Material');
+            }
         }
     },
 

@@ -106,6 +106,7 @@ class Contracts extends MY_Controller {
 
         $c_id = $data['c_id'];
         unset($data['c_id']);
+        unset($data['jo_id']);
 
         $this->contracts_model->save($data, $c_id);
     }

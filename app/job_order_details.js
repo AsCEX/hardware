@@ -2,6 +2,7 @@
 var job_order_details = {
     jo_id: 0,
     contract_id: 0,
+    cd_id: 0,
 
     init: function(jo_id, contract_id) {
         this.jo_id = jo_id;
@@ -25,48 +26,6 @@ var job_order_details = {
             groupFormatter:function(value,rows){
                 return value;
             },
-            /*view: detailview,
-            detailFormatter: function(index,row){
-                return '<div style="padding:0px"><table class="ddv"></table></div>';
-            },
-            onExpandRow: function(index,row){
-                if(row.cat_id == 1){
-                    var ddv = $(this).datagrid('getRowDetail',index).find('table.ddv');
-                    ddv.datagrid({
-                        url:site_url + 'datagrid_data1.json',
-                        fitColumns:false,
-                        singleSelect:true,
-                        rownumbers:true,
-                        toolbar: [
-                            {
-                                text: '',
-                                iconCls: 'fa fa-plus green',
-                                handler: function(){
-                                }
-                            },
-                        ],
-                        loadMsg:'',
-                        height:'auto',
-                        columns:[[
-                            {field:'orderid',title:'Qty',width:100},
-                            {field:'quantity',title:'Unit',width:100},
-                            {field:'quantity',title:'Thickness',width:300,align:'right'},
-                            {field:'unitprice',title:'Total',width:300,align:'right'}
-                        ]],
-                        onResize:function(){
-                            $('#dg-job-order-details').datagrid('fixDetailRowHeight',index);
-                        },
-                        onLoadSuccess:function(){
-                            setTimeout(function(){
-                                $('#dg-job-order-details').datagrid('fixDetailRowHeight',index);
-                            },0);
-                        }
-                    });
-                    $('#dg-job-order-details').datagrid('fixDetailRowHeight',index);
-                }else{
-                    return false;
-                }
-            },*/
             columns:[
                 [
                     {field:'cd_qty',title:'Qty',width:'10%',align:'right',
@@ -122,7 +81,10 @@ var job_order_details = {
             ],
             onRowContextMenu: function(e, index, row){
                 e.preventDefault();
+                self.cd_id = row.cd_id;
+
                 if(row && row.cat_id == 1 && !parseFloat(row.cd_length) ){
+
                     $(e.target).parents('tr').addClass('datagrid-context-menu');
                     $('#jo-breakdown-menu').menu('show', {
                         left: e.pageX,
@@ -173,8 +135,9 @@ var job_order_details = {
             },
             buttons:[{
                 text:'Save',
+                iconCls: 'fa fa-save',
                 handler:function(){
-                    contract_details.saveContractMaterial();
+                    breakdown.accept();
                 }
             },{
                 text:'Close',
@@ -187,7 +150,8 @@ var job_order_details = {
     },
 
     open_breakdown: function(){
-        $('#dlg-job-breakdown-details').dialog('open').dialog('refresh', site_url + 'job_orders/order_breakdown').dialog('setTitle', 'Breakdown');
+        self = this;
+        $('#dlg-job-breakdown-details').dialog('open').dialog('refresh', site_url + 'job_orders/order_breakdown/' + self.cd_id).dialog('setTitle', 'Breakdown');
     }
 
 

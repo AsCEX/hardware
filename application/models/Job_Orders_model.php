@@ -65,6 +65,13 @@ class Job_Orders_model extends CI_Model {
         return $query->result();
     }
 
+    public function getBreakdown($cd_id = 0){
+        $sql = "SELECT * FROM contract_detail_breakdown WHERE cdb_cd_id = " . $cd_id;
+        $query = $this->db->query($sql);
+
+        return $query->result();
+    }
+
 }
 
 ?>

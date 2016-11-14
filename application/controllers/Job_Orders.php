@@ -13,9 +13,9 @@ class Job_Orders extends MY_Controller {
         $this->load->view('job_orders/index');
     }
 
-    public function order_breakdown() {
-
-        $this->load->view('job_orders/orderline_breakdown');
+    public function order_breakdown($cd_id = 0) {
+        $data['cd_id'] = $cd_id;
+        $this->load->view('job_orders/orderline_breakdown', $data);
     }
 
     public function getJO(){
@@ -58,6 +58,31 @@ class Job_Orders extends MY_Controller {
             ->set_output(json_encode($sc_data) );
     }
 
+    public function getBreakdown($cd_id = 0) {
+        $brkdwn = $this->job_orders_model->getBreakdown($cd_id);
+
+        $resultSet['rows'] = $brkdwn;
+        $resultSet['total'] = count($brkdwn);
+
+        $b_tot = 0;
+        foreach($brkdwn as $b){
+            $b_tot += $b->cdb_qty * $b->cdb_length;
+        }
+
+
+        $footer = array();
+        $footer[] = array(
+            'footer'    => 1,
+            'cdb_length' => 'Total:',
+            'cdb_total' => $b_tot
+        );
+
+        $resultSet['footer'] = $footer;
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($resultSet) );
+    }
 }
 
 ?>

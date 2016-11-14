@@ -5,6 +5,14 @@ body{
     visibility: hidden;
 }
 
+.textbox .textbox-text{
+    color: #000;
+}
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .fitem{
     margin-bottom:5px;
 }
