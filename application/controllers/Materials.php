@@ -33,5 +33,39 @@ class Materials extends MY_Controller
         $this->load->view('contracts/order_details');
     }
 
+    public function dialog( $mat_id = 0 ) {
+
+        $material = $this->materials_model->getMaterialById( $mat_id );
+
+        $data['material'] = ($material) ? $material : array();
+
+        $this->load->view('materials/dialog/add', $data);
+    }
+
+    public function saveMaterial() {
+
+        $post = $_POST;
+
+        $material = $this->materials_model->save( $post, $post['mat_id'] );
+
+        if ( $material ) {
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output( json_encode( array( 'status' => 'success' ) ) );
+        }
+    }
+
+    public function deleteMaterial() {
+
+        $deleteMaterial = $this->materials_model->delete( $_POST );
+
+        if ( $deleteMaterial ) {
+
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output( json_encode( array( 'status' => 'success' ) ) );
+        }
+    }
+
 }
 ?>
