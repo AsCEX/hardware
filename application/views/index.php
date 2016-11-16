@@ -47,6 +47,8 @@
                 <div class="menu-links" data-url="<?php echo site_url('suppliers'); ?>" >Suppliers</div>
                 <div class="menu-sep"></div>
                 <div class="menu-links" data-url="<?php echo site_url('colors'); ?>" >Colors</div>
+                <div class="menu-links" data-url="<?php echo site_url('charges'); ?>" >Charges</div>
+                <div class="menu-links" data-url="<?php echo site_url('materials'); ?>" >Materials</div>
 
             </div>
             <div id="transactions" style="width:250px;">

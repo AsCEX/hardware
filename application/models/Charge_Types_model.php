@@ -19,6 +19,7 @@ class Charge_Types_model extends CI_Model
         return $charge_types->result();
     }
 
+
 }
 
 

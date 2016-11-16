@@ -11,7 +11,28 @@ class Charges extends MY_Controller
 
     public function index()
     {
-        $this->load->view('charges/index');
+        $this->load->view('charges/default');
+    }
+
+    public function dialog( $chrg_id = 0 ) {
+
+        $charge = $this->charges_model->getChargeById( $chrg_id );
+
+        $data['charge'] = ($charge) ? $charge : array();
+
+        $this->load->view('charges/dialog/add', $data);
+    }
+
+    public function getChargesGrid() {
+
+        $charges = $this->charges_model->getChargesGrid();
+
+        $resultSet['rows'] = $charges;
+        $resultSet['total'] = count($charges);
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($resultSet) );
     }
 
     public function getChargesComboBox() {
@@ -63,6 +84,18 @@ class Charges extends MY_Controller
         $charge = $this->charges_model->save($post, $post['chrg_id'] );
 
         if ( $charge ) {
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output( json_encode( array( 'status' => 'success' ) ) );
+        }
+    }
+
+    public function deleteCharge () {
+
+        $deleteCharge = $this->charges_model->delete( $_POST );
+
+        if ( $deleteCharge ) {
+
             $this->output
                 ->set_content_type('application/json')
                 ->set_output( json_encode( array( 'status' => 'success' ) ) );
