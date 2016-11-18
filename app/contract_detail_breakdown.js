@@ -50,6 +50,7 @@ var breakdown = {
             ],
             columns:[
                 [
+                    {field: 'cdb_id', hidden: true},
                     {field:'cdb_qty',title:'Qty',width:'20%',align:'right',
                         formatter: function(value,row,index){
 
@@ -73,7 +74,7 @@ var breakdown = {
                             options: {
                                 valueField: 'id',
                                 textField: 'text',
-                                data: [{id: 'pcs',text: 'pcs'}],
+                                data: [{id: 'pcs',text: 'pcs'},{id: 'Lm',text: 'Lm'}],
                                 editable:false,
                                 required: true
                             }
@@ -149,18 +150,21 @@ var breakdown = {
     },
 
     onEndEdit: function(index, row){
-        /*var ed = $(this).datagrid('getEditor', {
-            index: index,
-            field: 'productid'
-        });
-        row.productname = $(ed.target).combobox('getText');*/
-        console.log(row);
+        
         $(this).datagrid('updateRow',{
             index: index,
             row: {
-                cd_id: 420
+                cd_id: self.cd_id
             }
         });
+
+        $.post( site_url + 'contract_detail_breakdown/saveContractDetailBreakdown', { data: row }, function(response) {
+            if ( response.status == 'success' ) {
+                $.messager.alert('Message', 'Success', 'info', function(){
+                    $(this).datagrid('reload');
+                })
+            }
+        }, 'json');
 
         $('#order-breakdown').datagrid('reloadFooter')
     },

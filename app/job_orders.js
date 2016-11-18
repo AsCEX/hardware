@@ -47,7 +47,7 @@ var job_orders = {
             onRowContextMenu: function(e, index, row){
                 e.preventDefault();
                 if(row){
-                    console.log(row.jo_id);
+                    //console.log(row.jo_id);
 
                     self.jo_id = row.jo_id;
 
