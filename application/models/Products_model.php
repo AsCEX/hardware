@@ -34,7 +34,6 @@ class Products_model extends CI_Model {
     public function getRoofingBendedPanels() {
 
         $this->db->where('p_cat_id !=', 3);
-        $this->db->or_where('p_color_id =', 'NULL');
         $this->db->join('categories', 'categories.cat_id = ' . $this->tbl_products .'.p_cat_id');
         $this->db->join('colors', 'colors.clr_id = '. $this->tbl_products .'.p_color_id');
         $res = $this->db->get($this->tbl_products);
@@ -96,7 +95,6 @@ class Products_model extends CI_Model {
     public function getHardwareAccessories() {
 
         $this->db->where('p_cat_id =', 3);
-        $this->db->or_where('p_color_id =', 'NULL');
         $this->db->join('categories', 'categories.cat_id = ' . $this->tbl_products .'.p_cat_id');
         $this->db->join('colors', 'colors.clr_id = '. $this->tbl_products .'.p_color_id');
         $res = $this->db->get($this->tbl_products);
