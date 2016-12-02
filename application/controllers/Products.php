@@ -13,6 +13,10 @@ class Products extends MY_Controller {
         //$this->load->view('contracts/index');
     }
 
+    public function roofing_bended_panels() {
+        $this->load->view('products/roofing_bended_panels');
+    }
+
     public function getProductsByCategoryComboBox( $cat_id = null) {
 
         $products = $this->products_model->getProductByCategory($cat_id);
@@ -37,5 +41,65 @@ class Products extends MY_Controller {
     public function getProductThicknessComboBox( $cat_id = null) {}
     public function getProductWidthComboBox( $cat_id = null) {}
     public function getProductsLengthComboBox( $cat_id = null) {}
+
+    public function getRoofingBendedPanels() {
+
+        $roofingBendedPanels = $this->products_model->getRoofingBendedPanels();
+
+        $resultSet['rows'] = $roofingBendedPanels;
+        $resultSet['total'] = count($roofingBendedPanels);
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($resultSet));
+    }
+
+    public function getRoofingBendedPanelsCategory() {
+
+        $roofingBendedPanelsCategory = $this->products_model->getRoofingBendedPanelsCategory();
+
+        $roofingBendedPanelsCategory_data = array();
+
+        foreach ($roofingBendedPanelsCategory as $p) {
+
+            $temp = array(
+                'id' => $p->cat_id,
+                'text' => $p->cat_name
+            );
+
+            $roofingBendedPanelsCategory_data[] = $temp;
+        }
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($roofingBendedPanelsCategory_data) );
+    }
+
+    public function saveRoofingBendedPanel() {
+
+        $post = $_POST;
+
+        $rbp = $this->products_model->saveRoofingBendedPanel( $post['data'] );
+
+        if ( $rbp ) {
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output( json_encode( array( 'status' => 'success' ) ) );
+        }
+    }
+
+    public function deleteRoofingBendedPanel() {
+
+        $post = $_POST;
+
+        $deleteRoofingBendedPanel = $this->products_model->deleteByProductId( $post );
+
+        if( $deleteRoofingBendedPanel ) {
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output( json_encode( array( 'status' => 'success' ) ) );
+        }
+
+    }
 
 }
