@@ -17,6 +17,10 @@ class Products extends MY_Controller {
         $this->load->view('products/roofing_bended_panels');
     }
 
+    public function hardware_accessories() {
+        $this->load->view('products/hardware_accessories');
+    }
+
     public function getProductsByCategoryComboBox( $cat_id = null) {
 
         $products = $this->products_model->getProductByCategory($cat_id);
@@ -75,11 +79,11 @@ class Products extends MY_Controller {
             ->set_output(json_encode($roofingBendedPanelsCategory_data) );
     }
 
-    public function saveRoofingBendedPanel() {
+    public function saveProduct() {
 
         $post = $_POST;
 
-        $rbp = $this->products_model->saveRoofingBendedPanel( $post['data'] );
+        $rbp = $this->products_model->save( $post['data'] );
 
         if ( $rbp ) {
             $this->output
@@ -88,7 +92,7 @@ class Products extends MY_Controller {
         }
     }
 
-    public function deleteRoofingBendedPanel() {
+    public function deleteByProductId() {
 
         $post = $_POST;
 
@@ -100,6 +104,18 @@ class Products extends MY_Controller {
                 ->set_output( json_encode( array( 'status' => 'success' ) ) );
         }
 
+    }
+
+    public function getHardwareAccessories() {
+
+        $hardwareAccessories = $this->products_model->getHardwareAccessories();
+
+        $resultSet['rows'] = $hardwareAccessories;
+        $resultSet['total'] = count($hardwareAccessories);
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($resultSet));
     }
 
 }

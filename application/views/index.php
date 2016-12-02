@@ -61,7 +61,7 @@
                 <div class="menu-links" data-url="<?php echo site_url('materials'); ?>" data-options="iconCls:'fa fa-home'" >Materials</div>
                 <div class="menu-sep"></div>
                 <div class="menu-links" data-url="<?php echo site_url('products/roofing_bended_panels'); ?>" data-options="iconCls:'fa fa-home'" >Roofing &amp; Bended Panels</div>
-                <div class="menu-links" data-url="" data-options="iconCls:'fa fa-cogs '" >Hardware Accessories</div>
+                <div class="menu-links" data-url="<?php echo site_url('products/hardware_accessories'); ?>" data-options="iconCls:'fa fa-cogs '" >Hardware Accessories</div>
             </div>
         </div>
 

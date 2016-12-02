@@ -50,7 +50,7 @@ class Products_model extends CI_Model {
         return $res->result();
     }
 
-    public function saveRoofingBendedPanel( $data ) {
+    public function save( $data ) {
 
         if ( isset($data['p_id']) ) {
 
@@ -91,6 +91,17 @@ class Products_model extends CI_Model {
 
         if ( $this->db->affected_rows() > 0 ) return TRUE;
         else return FALSE;
+    }
+
+    public function getHardwareAccessories() {
+
+        $this->db->where('p_cat_id =', 3);
+        $this->db->or_where('p_color_id =', 'NULL');
+        $this->db->join('categories', 'categories.cat_id = ' . $this->tbl_products .'.p_cat_id');
+        $this->db->join('colors', 'colors.clr_id = '. $this->tbl_products .'.p_color_id');
+        $res = $this->db->get($this->tbl_products);
+
+        return $res->result();
     }
 
 }

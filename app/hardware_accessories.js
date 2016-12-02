@@ -1,5 +1,5 @@
 
-var roofing_bended_panels = {
+var hardware_accessories = {
 
     init: function() {
         this.datagrid();
@@ -7,35 +7,35 @@ var roofing_bended_panels = {
 
     datagrid: function() {
         self = this;
-        $('#roofing-bended-panels').datagrid({
-            url: site_url + "products/getRoofingBendedPanels",
+        $('#hardware-accessories').datagrid({
+            url: site_url + "products/getHardwareAccessories",
             toolbar: [
                 {
                     text: 'Add',
                     iconCls: 'fa fa-plus',
                     handler: function(){
-                        roofing_bended_panels.append();
+                        hardware_accessories.append();
                     }
                 },
                 {
                     text: 'Save',
                     iconCls: 'fa fa-save',
                     handler: function(){
-                        roofing_bended_panels.accept();
+                        hardware_accessories.accept();
                     }
                 },
                 {
                     text: 'Delete',
                     iconCls: 'fa fa-remove',
                     handler: function(){
-                        roofing_bended_panels.removeit();
+                        hardware_accessories.removeit();
                     }
                 },
                 {
                     text: 'Cancel',
                     iconCls: 'fa fa-undo',
                     handler: function(){
-                        roofing_bended_panels.reject();
+                        hardware_accessories.reject();
                     }
                 },
             ],
@@ -46,25 +46,11 @@ var roofing_bended_panels = {
             singleSelect:"true",
             columns:[
                 [
-                    {field:'p_name',title:'Name',width:'10%',
+                    {field:'p_name',title:'Name',width:'20%',
                         editor: {
                             type: 'textbox',
                             options: {
                                 required: true
-                            }
-                        }
-                    },
-                    {field:'cat_name', title: 'Category', width: '10%', align: 'right',
-                        editor: {
-                            type: 'combobox',
-                            options: {
-                                url: 'products/getRoofingBendedPanelsCategory',
-                                method: 'get',
-                                valueField: 'id',
-                                textField: 'text',
-                                editable: false,
-                                required: true,
-                                prompt: 'Select Category'
                             }
                         }
                     },
@@ -120,10 +106,10 @@ var roofing_bended_panels = {
 
     endEditing: function(){
         self = this;
-        if (roofing_bended_panels.editIndex == undefined){return true}
-        if ($('#roofing-bended-panels').datagrid('validateRow', roofing_bended_panels.editIndex)){
-            $('#roofing-bended-panels').datagrid('endEdit', roofing_bended_panels.editIndex);
-            roofing_bended_panels.editIndex = undefined;
+        if (hardware_accessories.editIndex == undefined){return true}
+        if ($('#hardware-accessories').datagrid('validateRow', hardware_accessories.editIndex)){
+            $('#hardware-accessories').datagrid('endEdit', hardware_accessories.editIndex);
+            hardware_accessories.editIndex = undefined;
             return true;
         } else {
             return false;
@@ -132,39 +118,40 @@ var roofing_bended_panels = {
 
     onClickCell: function(index, field){
         self = this;
-        if (roofing_bended_panels.editIndex != index){
-            if (roofing_bended_panels.endEditing()){
-                $('#roofing-bended-panels').datagrid('selectRow', index)
+        if (hardware_accessories.editIndex != index){
+            if (hardware_accessories.endEditing()){
+                $('#hardware-accessories').datagrid('selectRow', index)
                     .datagrid('beginEdit', index);
-                var ed = $('#roofing-bended-panels').datagrid('getEditor', {index:index,field:field});
+                var ed = $('#hardware-accessories').datagrid('getEditor', {index:index,field:field});
                 if (ed){
                     ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus().bind('keyup', function(e)
                     {
                         var code = e.keyCode || e.which;
                         if(code == 13) { //Enter keycode
-                            $('#roofing-bended-panels').datagrid('acceptChanges');
-                            roofing_bended_panels.editIndex = undefined;
+                            $('#hardware-accessories').datagrid('acceptChanges');
+                            hardware_accessories.editIndex = undefined;
                         }
                     });
 
                 }
-                roofing_bended_panels.editIndex = index;
+                hardware_accessories.editIndex = index;
             } else {
                 setTimeout(function(){
-                    $('#roofing-bended-panels').datagrid('selectRow', roofing_bended_panels.editIndex);
+                    $('#hardware-accessories').datagrid('selectRow', hardware_accessories.editIndex);
                 },0);
             }
         }
     },
 
     onEndEdit: function(index, row){
-        self = this;
+
+        row.cat_name = 3;
 
         $.post( site_url + 'products/saveProduct', { data: row }, function(response) {
             if ( response.status == 'success' ) {
                 $.messager.alert('Message', 'Success', 'info', function(){
-                    $('#roofing-bended-panels').datagrid('reload');
-                    roofing_bended_panels.editIndex = undefined;
+                    $('#hardware-accessories').datagrid('reload');
+                    hardware_accessories.editIndex = undefined;
                 })
             }
         }, 'json');
@@ -173,58 +160,56 @@ var roofing_bended_panels = {
     onClickRow: function(index, row) {
         self = this;
 
-        if (roofing_bended_panels.editIndex == undefined){return}
+        if (hardware_accessories.editIndex == undefined){return}
 
-        if($('#roofing-bended-panels').datagrid('selectRow', index)
-                    .datagrid('beginEdit', index)) {
-            var categoryEd = $('#roofing-bended-panels').datagrid('getEditor', {index:index,field:'cat_name'}),
-                colorEd = $('#roofing-bended-panels').datagrid('getEditor', {index:index,field:'clr_name'});
-            $(categoryEd.target).combobox('setValue', row.p_cat_id);
+        if($('#hardware-accessories').datagrid('selectRow', index)
+                .datagrid('beginEdit', index)) {
+            var colorEd = $('#hardware-accessories').datagrid('getEditor', {index:index,field:'clr_name'});
             $(colorEd.target).combobox('setValue', row.p_color_id);
         }
     },
 
     append: function(){
         self = this;
-        if (roofing_bended_panels.endEditing()){
-            $('#roofing-bended-panels').datagrid('appendRow',{p_name:'', p_in_stock: 1});
-            roofing_bended_panels.editIndex = $('#roofing-bended-panels').datagrid('getRows').length-1;
-            $('#roofing-bended-panels').datagrid('selectRow', roofing_bended_panels.editIndex)
-                .datagrid('beginEdit', roofing_bended_panels.editIndex);
+        if (hardware_accessories.endEditing()){
+            $('#hardware-accessories').datagrid('appendRow',{p_name:'', p_in_stock: 1});
+            hardware_accessories.editIndex = $('#hardware-accessories').datagrid('getRows').length-1;
+            $('#hardware-accessories').datagrid('selectRow', hardware_accessories.editIndex)
+                .datagrid('beginEdit', hardware_accessories.editIndex);
         }
     },
 
     removeit: function(){
-        if (roofing_bended_panels.editIndex == undefined){return}
+        if (hardware_accessories.editIndex == undefined){return}
         self = this;
-        var row = $('#roofing-bended-panels').datagrid('getSelected');
+        var row = $('#hardware-accessories').datagrid('getSelected');
         if ( row ) {
             $.messager.confirm('Confirm', 'Delete Selected?', function(r) {
                 if ( r ) {
                     $.post( site_url + 'products/deleteByProductId', { p_id: row.p_id }, function(response) {
                         if ( response.status == 'success' ) {
                             $.messager.alert('Message', 'Success', 'info', function(){
-                                $('#roofing-bended-panels').datagrid('reload');
+                                $('#hardware-accessories').datagrid('reload');
                             });
-                            $('#roofing-bended-panels').datagrid('cancelEdit', roofing_bended_panels.editIndex)
-                                .datagrid('deleteRow', roofing_bended_panels.editIndex);
-                            roofing_bended_panels.editIndex = undefined;
+                            $('#hardware-accessories').datagrid('cancelEdit', hardware_accessories.editIndex)
+                                .datagrid('deleteRow', hardware_accessories.editIndex);
+                            hardware_accessories.editIndex = undefined;
                         }
                     }, 'json');
                 }
             })
         }
-        
+
     },
 
     accept: function(){
-        if (roofing_bended_panels.endEditing()){
-            $('#roofing-bended-panels').datagrid('acceptChanges');
+        if (hardware_accessories.endEditing()){
+            $('#hardware-accessories').datagrid('acceptChanges');
         }
     },
 
     reject: function(){
-        $('#roofing-bended-panels').datagrid('rejectChanges');
-        roofing_bended_panels.editIndex = undefined;
+        $('#hardware-accessories').datagrid('rejectChanges');
+        hardware_accessories.editIndex = undefined;
     },
 }
